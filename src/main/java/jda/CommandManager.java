@@ -43,6 +43,8 @@ public class CommandManager {
         addCommand(new RepeatCommand());
         addCommand(new QueueLoopCommand());
         addCommand(new LeaveCommand());
+        addCommand(new Translate());
+        addCommand(new LanguageList());
     }
 
     private void addCommand(ICommand cmd) {
