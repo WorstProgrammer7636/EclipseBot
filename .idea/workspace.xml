@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a5af583d-0519-4012-985c-23c2b0633e7b" name="Default Changelist" comment="EventWaiterExampleCommand!&#10;ResumeCommand!&#10;Bug Fixes, Reformatting, added functionality for everything else">
+      <change afterPath="$PROJECT_DIR$/../80SMP/plugin.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../80SMP/src/Group" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project110/Project110.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Quarantine Projects/src/Chudnovsky.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Quarantine Projects/src/Debugging.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Quarantine Projects/src/FileWrite.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Quarantine Projects/src/ItemSoldErrors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../USACOBronze/src/Acowdemia.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../USACOBronze/src/AcowdemiaTwo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../USACOBronze/src/ChineseNewYear.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../USACOBronze/src/ClockwiseFence.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../USACOBronze/src/ComfortableCows.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../USACOBronze/src/CowGroups.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../USACOBronze/src/Cowphabet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../USACOBronze/src/Debug.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../USACOBronze/src/NewComfortableCows.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../USACOBronze/src/Stall.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../USACOBronze/src/Traffic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA1/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA1/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA1/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA1/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA1/PA1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA1/out/production/PA1/DetailedWordCount.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA1/out/production/PA1/PA1Strings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA1/src/DetailedWordCount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA1/src/PA1Strings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA2/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA2/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA2/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA2/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA2/PA2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA2/out/production/PA2/PA2Strings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA2/out/production/PA2/TicTacToe_Attempt2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA2/src/PA2Strings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA2/src/TicTacToe_Attempt2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA3/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA3/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA3/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA3/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA3/PA3.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA3/out/production/PA3/PA3Constants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA3/out/production/PA3/StringSorter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA3/src/PA3Constants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA3/src/StringSorter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA4/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA4/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA4/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA4/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA4/PA4.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA4/out/production/PA4/PA4Strings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA4/out/production/PA4/RadioactivePinwheel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA4/src/PA4Strings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PA4/src/RadioactivePinwheel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quarantine Projects/out/production/Quarantine Projects/MoreDebugging.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quarantine Projects/src/MoreDebugging.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Quarantine Projects/src/MoreDebugging.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../USACOBronze/lifeguards.out" beforeDir="false" afterPath="$PROJECT_DIR$/../USACOBronze/lifeguards.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../USACOBronze/out/production/USACOBronze/Lifeguards.class" beforeDir="false" afterPath="$PROJECT_DIR$/../USACOBronze/out/production/USACOBronze/Lifeguards.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../USACOBronze/src/Lifeguards.java" beforeDir="false" afterPath="$PROJECT_DIR$/../USACOBronze/src/Lifeguards.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/src/main/java/commands/Calculate.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/src/main/java/commands/Calculate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/src/main/java/commands/PigLatin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/src/main/java/commands/PigLatin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/src/main/java/commands/Pinwheel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/src/main/java/commands/Pinwheel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/src/main/java/commands/TicTacToe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/src/main/java/commands/Translate.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/src/main/java/commands/Translate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/src/main/java/commands/Unmute.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/src/main/java/commands/Unmute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/src/main/java/events/CensorWords.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/src/main/java/events/CensorWords.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/src/main/java/events/HelloEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/src/main/java/events/HelloEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/target/classes/commands/Calculate.class" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/target/classes/commands/Calculate.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/target/classes/commands/PigLatin.class" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/target/classes/commands/PigLatin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/target/classes/commands/Pinwheel.class" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/target/classes/commands/Pinwheel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/target/classes/events/CensorWords.class" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/target/classes/events/CensorWords.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kek/target/classes/events/HelloEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/../kek/target/classes/events/HelloEvent.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1v2UQG8xYcm3cZjPdBkAkUdAkkO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.CommitDialog" />
+  </component>
+  <component name="RunManager">
+    <configuration name="BotInitiation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="jda.BotInitiation" />
+      <module name="InutileDiscord" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.BotInitiation" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a5af583d-0519-4012-985c-23c2b0633e7b" name="Default Changelist" comment="" />
+      <created>1625759662519</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1625759662519</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Initial Commit">
+      <created>1625974365080</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1625974365080</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add ENV Template for anyone downloading the code, no token or important details added">
+      <created>1625974843985</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1625974843985</updated>
+    </task>
+    <task id="LOCAL-00003" summary="InstagramCommand Added, CANNOT BE USED. DO NOT TRY TO USE">
+      <created>1625980766956</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1625980766957</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Set Prefix added, a lot of commands have been changed. Set prefix is now a lot more efficient than previously made.&#10;Was not able to use database for prefixes unfortunately, so a text file is used.">
+      <created>1626117695754</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1626117695754</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Prefixes file ignored for privacy">
+      <created>1626117766027</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1626117766027</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Prefixes file ignored for privacy">
+      <created>1626118578545</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1626118578546</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Lot of Things Removed">
+      <created>1626118961428</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1626118961428</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Lot of Things Removed">
+      <created>1626119168765</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1626119168765</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Lot of Things Removed">
+      <created>1626119285401</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1626119285401</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Lot of Things Removed">
+      <created>1626119360609</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1626119360609</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Update, Music is incomplete, a couple new commands">
+      <created>1626207648888</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1626207648888</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Workspace xml update">
+      <created>1626207688533</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1626207688533</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Big Music Update">
+      <created>1626213664180</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1626213664180</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Finished All Basic Music Commands, and Removed GitIgnore for a special someone!">
+      <created>1626233684435</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1626233684435</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Added Repeat Command, Several bug fixes as well">
+      <created>1626235958268</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1626235958268</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Added Repeat Command, Several bug fixes as well">
+      <created>1626236417533</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1626236417533</updated>
+    </task>
+    <task id="LOCAL-00017" summary="EventWaiterExampleCommand!&#10;ResumeCommand!&#10;Bug Fixes, Reformatting, added functionality for everything else">
+      <created>1626292234574</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1626292234574</updated>
+    </task>
+    <task id="LOCAL-00018" summary="EventWaiterExampleCommand!&#10;ResumeCommand!&#10;Bug Fixes, Reformatting, added functionality for everything else">
+      <created>1626292340956</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1626292340956</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Commit" />
+    <MESSAGE value="Add ENV Template for anyone downloading the code, no token or important details added" />
+    <MESSAGE value="InstagramCommand Added, CANNOT BE USED. DO NOT TRY TO USE" />
+    <MESSAGE value="Set Prefix added, a lot of commands have been changed. Set prefix is now a lot more efficient than previously made.&#10;Was not able to use database for prefixes unfortunately, so a text file is used." />
+    <MESSAGE value="Prefixes file ignored for privacy" />
+    <MESSAGE value="Lot of Things Removed" />
+    <MESSAGE value="Update, Music is incomplete, a couple new commands" />
+    <MESSAGE value="Workspace xml update" />
+    <MESSAGE value="Big Music Update" />
+    <MESSAGE value="Finished All Basic Music Commands, and Removed GitIgnore for a special someone!" />
+    <MESSAGE value="Added Repeat Command, Several bug fixes as well" />
+    <MESSAGE value="EventWaiterExampleCommand!&#10;ResumeCommand!&#10;Bug Fixes, Reformatting, added functionality for everything else" />
+    <option name="LAST_COMMIT_MESSAGE" value="EventWaiterExampleCommand!&#10;ResumeCommand!&#10;Bug Fixes, Reformatting, added functionality for everything else" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1083" y="523" key="FileChooserDialogImpl" timestamp="1626330859123">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1083" y="523" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1626330859123" />
+    <state width="1877" height="233" key="GridCell.Tab.0.bottom" timestamp="1626330127579">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="233" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1626330127579" />
+    <state width="1877" height="233" key="GridCell.Tab.0.center" timestamp="1626330127578">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="233" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1626330127578" />
+    <state width="1877" height="233" key="GridCell.Tab.0.left" timestamp="1626330127578">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="233" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1626330127578" />
+    <state width="1877" height="233" key="GridCell.Tab.0.right" timestamp="1626330127579">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="233" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1626330127579" />
+    <state x="685" y="189" key="SettingsEditor" timestamp="1626331095410">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="685" y="189" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1626331095410" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.UnsupportedOperationException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="com.sedmelluq.discord.lavaplayer.tools.FriendlyException" package="com.sedmelluq.discord.lavaplayer.tools" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.RuntimeException" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
