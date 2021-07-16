@@ -5,6 +5,7 @@ import jda.command.CommandContext;
 import jda.command.ICommand;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.requests.restaction.MessageAction;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;

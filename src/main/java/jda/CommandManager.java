@@ -39,13 +39,14 @@ public class CommandManager {
         addCommand(new PauseCommand());
         addCommand(new ResumeCommand());
         addCommand(new NowPlayingCommand());
-        addCommand(new QueueCommand());
+        addCommand(new QueueCommand(waiter));
         addCommand(new RepeatCommand());
         addCommand(new QueueLoopCommand());
         addCommand(new LeaveCommand());
         addCommand(new Translate());
         addCommand(new LanguageList());
         addCommand(new TicTacToe(waiter));
+        addCommand(new ShuffleCommand());
     }
 
     private void addCommand(ICommand cmd) {

@@ -12,7 +12,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class TrackScheduler extends AudioEventAdapter {
 
     public final AudioPlayer player;
-    public final BlockingQueue<AudioTrack> queue;
+    public BlockingQueue<AudioTrack> queue;
     public boolean repeating = false;
     public boolean queuerepeating = false;
 
@@ -45,10 +45,13 @@ public class TrackScheduler extends AudioEventAdapter {
             }
             track = this.queue.poll();
         }
-        try {
-            this.player.startTrack(track, false);
-        } catch (FriendlyException e) {
-            this.player.startTrack(track, false);
+        while(true) {
+            try {
+                this.player.startTrack(track, false);
+            } catch (RuntimeException e) {
+                continue;
+            }
+            break;
         }
     }
 

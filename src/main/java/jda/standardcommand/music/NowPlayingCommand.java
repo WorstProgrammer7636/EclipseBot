@@ -3,10 +3,14 @@ package jda.standardcommand.music;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
+import jda.Config;
 import jda.command.CommandContext;
 import jda.command.ICommand;
 import jda.lavaplayer.GuildMusicManager;
 import jda.lavaplayer.PlayerManager;
+import me.duncte123.botcommons.messaging.EmbedUtils;
+import me.duncte123.botcommons.web.WebUtils;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -54,6 +58,7 @@ public class NowPlayingCommand implements ICommand {
             channel.sendMessage("There is no track currently playing!").queue();
             return;
         }
+
         long nowparsed = (playingTrack.getPosition());
         String now = formatTime(nowparsed);
 
@@ -62,13 +67,49 @@ public class NowPlayingCommand implements ICommand {
         String total = formatTime(totalparsed);
 
         final AudioTrackInfo info = playingTrack.getInfo();
-        channel.sendMessageFormat("Now playing `%s` by `%s` \n (Link: <%s>) \n Position: `%s / %s`",
-                info.title, info.author, info.uri, now, total).queue();
+        StringBuilder builder = new StringBuilder();
+        double frac = ((double) nowparsed / totalparsed);
 
+        builder.append("\n \n");
+        if (musicManager.audioPlayer.isPaused()) {
+            builder.append("**The Player Is Paused**\n \n");
+        }
+        EmbedBuilder embedBuilder;
+        builder.append(String.format("[`%s`](%s) by `%s` \n Position: `%s / %s` \n \n ",
+                info.title, info.uri, info.author, now, total));
+        for(double i = 0.0; i < 18; i++) {
+            if(frac > i/18.0) {
+                if((i+1)/18 > frac) {
+                    builder.append(" :black_large_square:");
+                } else {
+                    builder.append(" :blue_square:");
+                }
+            } else {
+                builder.append(" :black_square_button:");
+            }
+        }
         ctx.getMessage().addReaction("✅").queue();
+        if (musicManager.scheduler.repeating) {
+            builder.append(" \n **This song is repeating!** \n Use the repeat command to cancel the repeat! \n");
+        }
+        embedBuilder = EmbedUtils.embedMessageWithTitle("Now Playing:", "" + builder);
+        embedBuilder.setFooter(String.format("Inutile || Queue Recycling: %s Song Repeat: %s",
+                musicManager.scheduler.queuerepeating ? "✅" : "❌"
+                , musicManager.scheduler.repeating ? "✅" : "❌"));
+
+        EmbedBuilder finalInfo = embedBuilder;
+
+        WebUtils.ins.getJSONObject("https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=" +
+                musicManager.audioPlayer.getPlayingTrack().getIdentifier() + "&key="
+                + Config.get("youtubeapitoken")).async((json) -> {
+
+            final String url = json.findValue("medium").get("url").asText();
+            finalInfo.setThumbnail(url);
+            channel.sendMessageEmbeds(finalInfo.build()).queue();
+        });
+
 
     }
-
 
     @Override
     public String getName() {
@@ -77,7 +118,7 @@ public class NowPlayingCommand implements ICommand {
 
     @Override
     public String getHelp() {
-        return null;
+        return "Shows the song that is currently playing \n Usage: `?nowplaying`";
     }
 
     @Override
