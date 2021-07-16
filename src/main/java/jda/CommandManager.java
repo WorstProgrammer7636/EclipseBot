@@ -27,7 +27,7 @@ public class CommandManager {
         addCommand(new WebhookCommand());
         addCommand(new WolframCommand());
         addCommand(new JokeCommand());
-        //IMPORTANT: API DOES NOT WORK, DO NOT TRY TO USE THIS COMMAND, THIS IS ONLY FOR EDUCATION PURPOSES
+        //IMPORTANT: INSTAGRAM API DOES NOT WORK, DO NOT TRY TO USE THIS COMMAND, THIS IS ONLY FOR EDUCATION PURPOSES
         addCommand(new InstagramCommand());
         addCommand(new SetPrefixCommand());
         addCommand(new MinecraftCommand());
@@ -45,6 +45,7 @@ public class CommandManager {
         addCommand(new LeaveCommand());
         addCommand(new Translate());
         addCommand(new LanguageList());
+        addCommand(new TicTacToe(waiter));
     }
 
     private void addCommand(ICommand cmd) {
