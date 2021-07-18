@@ -47,6 +47,7 @@ public class CommandManager {
         addCommand(new LanguageList());
         addCommand(new TicTacToe(waiter));
         addCommand(new ShuffleCommand());
+        addCommand(new ConnectFour(waiter));
     }
 
     private void addCommand(ICommand cmd) {
