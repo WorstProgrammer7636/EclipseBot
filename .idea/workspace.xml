@@ -40,7 +40,8 @@
     <list default="true" id="a5af583d-0519-4012-985c-23c2b0633e7b" name="Default Changelist" comment="EventWaiterExampleCommand!&#10;ResumeCommand!&#10;Bug Fixes, Reformatting, added functionality for everything else">
       <change afterPath="$PROJECT_DIR$/../80SMP/plugin.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../80SMP/src/Group" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/music/ShuffleCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/ConnectFour.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/music/Spotify.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Project110/Project110.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Quarantine Projects/src/Chudnovsky.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Quarantine Projects/src/Debugging.java" afterDir="false" />
@@ -58,18 +59,9 @@
       <change afterPath="$PROJECT_DIR$/../USACOBronze/src/Stall.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../USACOBronze/src/Traffic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jda/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/CommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/lavaplayer/TrackScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/lavaplayer/TrackScheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/standardcommand/EventWaiterExampleCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/EventWaiterExampleCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/standardcommand/music/NowPlayingCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/music/NowPlayingCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/standardcommand/music/QueueCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/music/QueueCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/standardcommand/music/QueueLoopCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/music/QueueLoopCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jda/standardcommand/TicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/TicTacToe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/jda/CommandManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/CommandManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/lavaplayer/TrackScheduler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/lavaplayer/TrackScheduler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/standardcommand/Debug.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/standardcommand/music/NowPlayingCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/standardcommand/music/NowPlayingCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/standardcommand/music/QueueCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/standardcommand/music/QueueCommand.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PA1/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../PA1/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../PA1/.idea/modules.xml" beforeDir="false" />
@@ -372,10 +364,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="EventWaiterExampleCommand!&#10;ResumeCommand!&#10;Bug Fixes, Reformatting, added functionality for everything else" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1457" y="242" key="#com.intellij.ide.util.MemberChooser" timestamp="1626401373373">
+    <state x="1457" y="242" key="#com.intellij.ide.util.MemberChooser" timestamp="1626503838102">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1457" y="242" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1626401373373" />
+    <state x="1457" y="242" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1626503838102" />
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1626467133991">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -384,22 +376,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1083" y="523" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1626330859123" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1626468667044">
+    <state width="1877" height="133" key="GridCell.Tab.0.bottom" timestamp="1626591754862">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1626468667044" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1626468667043">
+    <state width="1877" height="133" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1626591754862" />
+    <state width="1877" height="133" key="GridCell.Tab.0.center" timestamp="1626591754862">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1626468667043" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1626468667043">
+    <state width="1877" height="133" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1626591754862" />
+    <state width="1877" height="133" key="GridCell.Tab.0.left" timestamp="1626591754862">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1626468667043" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1626468667043">
+    <state width="1877" height="133" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1626591754862" />
+    <state width="1877" height="133" key="GridCell.Tab.0.right" timestamp="1626591754862">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1626468667043" />
+    <state width="1877" height="133" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1626591754862" />
     <state width="1877" height="338" key="GridCell.Tab.1.bottom" timestamp="1626385085582">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
