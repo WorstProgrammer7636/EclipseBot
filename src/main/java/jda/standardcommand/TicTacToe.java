@@ -198,6 +198,10 @@ public class TicTacToe implements ICommand {
                             channel.sendMessage(boardAsString).queue();
                             channel.sendMessage("The bot won. You lost. How can you anybody be this bad").queue();
                             return;
+                        } else if (buttonsAlreadyClicked.size() == 9){
+                            channel.sendMessage(boardAsString).queue();
+                            channel.sendMessage("Tie").queue();
+                            return;
                         }
 
 
