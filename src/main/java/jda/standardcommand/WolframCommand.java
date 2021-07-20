@@ -6,10 +6,15 @@ import me.duncte123.botcommons.messaging.EmbedUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.URL;
 import java.util.List;
 
 public class WolframCommand implements ICommand {
+
     @Override
     public void handle(CommandContext ctx) throws IOException {
         final List<String> args = ctx.getArgs();
@@ -23,9 +28,16 @@ public class WolframCommand implements ICommand {
         }
         String searchResult = String.join("+", args);
         String finalURL = "http://api.wolframalpha.com/v2/simple?appid=YRJUA8-YKAJKT52GG&i=" + searchResult + "%3F";
-        EmbedBuilder info = EmbedUtils.embedImageWithTitle(String.join(" ", args), finalURL, finalURL);
-        info.setFooter("Inutile || Image Won't Load? Click on the link!");
-        channel.sendMessageEmbeds(info.build()).queue();
+
+        File filePath = new File("/Users/5kyle/Desktop/DiscordWolfram/output.jpg");
+        URL url = new URL(finalURL);
+        BufferedImage image = ImageIO.read(url);
+        ImageIO.write(image, "jpg", new File("/Users/5kyle/Desktop/DiscordWolfram/output.jpg"));
+        channel.sendMessage("Here is the answer to your question: ").addFile(filePath).queue();
+
+        //EmbedBuilder info = EmbedUtils.embedImageWithTitle(String.join(" ", args), finalURL, finalURL);
+        //info.setFooter("Inutile || Image Won't Load? Click on the link!");
+        //channel.sendMessageEmbeds(info.build()).queue();
     }
 
     @Override
