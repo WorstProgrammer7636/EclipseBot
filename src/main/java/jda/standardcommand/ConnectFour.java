@@ -257,7 +257,7 @@ public class ConnectFour implements ICommand {
             if (board[x][y - 1].equals(color) && board[x][y].equals(color) && board[x][y + 1].equals(color) && board[x][y+2].equals(color)){
                 if (color.equals(":red_circle:")){
                     return 1;
-                } else if (color.equals(":yellow_circle")){
+                } else if (color.equals(":yellow_circle:")){
                     return -1;
                 }
             }
@@ -270,7 +270,7 @@ public class ConnectFour implements ICommand {
             if (board[x][y - 2].equals(color) && board[x][y - 1].equals(color) && board[x][y].equals(color) && board[x][y+1].equals(color)){
                 if (color.equals(":red_circle:")){
                     return 1;
-                } else if (color.equals(":yellow_circle")){
+                } else if (color.equals(":yellow_circle:")){
                     return -1;
                 }
             }
@@ -313,7 +313,7 @@ public class ConnectFour implements ICommand {
             if (board[x - 1][y].equals(color) && board[x][y].equals(color) && board[x + 1][y].equals(color) && board[x + 2][y].equals(color)){
                 if (color.equals(":red_circle:")){
                     return 1;
-                } else if (color.equals(":yellow_circle")){
+                } else if (color.equals(":yellow_circle:")){
                     return -1;
                 }
             }
@@ -326,7 +326,7 @@ public class ConnectFour implements ICommand {
             if (board[x - 2][y].equals(color) && board[x - 1][y].equals(color) && board[x][y].equals(color) && board[x + 1][y].equals(color)){
                 if (color.equals(":red_circle:")){
                     return 1;
-                } else if (color.equals(":yellow_circle")){
+                } else if (color.equals(":yellow_circle:")){
                     return -1;
                 }
             }
