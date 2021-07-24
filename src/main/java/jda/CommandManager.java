@@ -5,6 +5,10 @@ import jda.command.CommandContext;
 import jda.command.ICommand;
 import jda.standardcommand.*;
 import jda.standardcommand.admin.SetPrefixCommand;
+import jda.standardcommand.games.ConnectFour;
+import jda.standardcommand.games.StrategicTicTacToe;
+import jda.standardcommand.games.TicTacToe;
+import jda.standardcommand.games.WordBomb;
 import jda.standardcommand.music.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -48,6 +52,8 @@ public class CommandManager {
         addCommand(new TicTacToe(waiter));
         addCommand(new ShuffleCommand());
         addCommand(new ConnectFour(waiter));
+        addCommand(new WordBomb(waiter));
+        addCommand(new StrategicTicTacToe(waiter));
     }
 
     private void addCommand(ICommand cmd) {
