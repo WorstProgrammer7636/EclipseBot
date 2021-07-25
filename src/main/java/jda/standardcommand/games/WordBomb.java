@@ -1,6 +1,7 @@
 package jda.standardcommand.games;
 
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
+import jda.Config;
 import jda.command.CommandContext;
 import jda.command.ICommand;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -122,7 +123,7 @@ public class WordBomb implements ICommand {
     public StringBuffer fetchAPI(String input){
         StringBuffer response = new StringBuffer();
         try {
-            String url = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + input + "?key=66f50df9-f4b7-4a27-a058-30f3c0098d2e";
+            String url = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + input + "?key=" + Config.get("collegiateapi");
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -142,7 +143,7 @@ public class WordBomb implements ICommand {
     public StringBuffer fetchAPI2(String input){
         StringBuffer response2 = new StringBuffer();
         try {
-            String url2 = "https://www.dictionaryapi.com/api/v3/references/medical/json/" + input + "?key=4dcf350b-7351-4f26-ba8a-ffe0824b415d";
+            String url2 = "https://www.dictionaryapi.com/api/v3/references/medical/json/" + input + "?key=" + Config.get("medicalapi");
             URL obj2 = new URL(url2);
             HttpURLConnection con2 = (HttpURLConnection) obj2.openConnection();
             BufferedReader in2 = new BufferedReader(new InputStreamReader(con2.getInputStream()));
@@ -240,8 +241,10 @@ public class WordBomb implements ICommand {
         }, e -> {
             String input = e.getMessage().getContentRaw();
             try {
-                String url = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + input + "?key=66f50df9-f4b7-4a27-a058-30f3c0098d2e";
-                String url2 = "https://www.dictionaryapi.com/api/v3/references/medical/json/" + input + "?key=4dcf350b-7351-4f26-ba8a-ffe0824b415d";
+                String apiKey1 = Config.get("collegiateapi");
+                String apiKey2 = Config.get("medicalapi");
+                String url = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + input + "?key=" + apiKey1;
+                String url2 = "https://www.dictionaryapi.com/api/v3/references/medical/json/" + input + "?key=" + apiKey2;
                 URL obj = new URL(url);
                 URL obj2 = new URL(url2);
                 HttpURLConnection con = (HttpURLConnection) obj.openConnection();

@@ -1,5 +1,6 @@
 package jda.standardcommand;
 
+import jda.Config;
 import jda.command.CommandContext;
 import jda.command.ICommand;
 import me.duncte123.botcommons.messaging.EmbedUtils;
@@ -27,7 +28,8 @@ public class WolframCommand implements ICommand {
             args.set(i, args.get(i).replace("+", "plus"));
         }
         String searchResult = String.join("+", args);
-        String finalURL = "http://api.wolframalpha.com/v2/simple?appid=YRJUA8-YKAJKT52GG&i=" + searchResult + "%3F";
+        String apiKey = Config.get("WOLFRAMAPI");
+        String finalURL = "http://api.wolframalpha.com/v2/simple?appid=" + apiKey + "=" + searchResult + "%3F";
 
         File filePath = new File("/Users/5kyle/Desktop/DiscordWolfram/output.jpg");
         URL url = new URL(finalURL);
