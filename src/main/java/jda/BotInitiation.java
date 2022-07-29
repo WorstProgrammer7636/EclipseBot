@@ -6,6 +6,7 @@ import me.duncte123.botcommons.web.WebUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
@@ -14,6 +15,7 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 import javax.security.auth.login.LoginException;
 import java.awt.*;
+import java.util.EnumSet;
 import java.util.Random;
 
 public class BotInitiation {
@@ -32,12 +34,16 @@ public class BotInitiation {
                         .setFooter("Inutile")
         );
         JDABuilder jdaBuilder = JDABuilder.createDefault(Config.get("token"))
-                .setChunkingFilter(ChunkingFilter.ALL).setMemberCachePolicy(MemberCachePolicy.ALL)
+                .setChunkingFilter(ChunkingFilter.ALL)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS,
                         GatewayIntent.GUILD_VOICE_STATES,
                         GatewayIntent.GUILD_MESSAGE_REACTIONS,
-                        GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MESSAGES)
-                .enableCache(CacheFlag.VOICE_STATE);
+                        GatewayIntent.GUILD_MESSAGES,
+                        GatewayIntent.GUILD_PRESENCES
+                        ).setDisabledCacheFlags(EnumSet.of(
+                        CacheFlag.EMOTE
+                ))
+                .enableCache(CacheFlag.VOICE_STATE).setMemberCachePolicy(MemberCachePolicy.ALL);
         JDA jda = null;
         try {
             jda = jdaBuilder.build();
@@ -45,6 +51,7 @@ public class BotInitiation {
             e.printStackTrace();
         }
         assert jda != null;
+        jda.getPresence().setStatus(OnlineStatus.ONLINE);
         jda.getPresence().setActivity(Activity.watching("?help"));
         jda.addEventListener(new Listener(waiter), waiter);
     }
