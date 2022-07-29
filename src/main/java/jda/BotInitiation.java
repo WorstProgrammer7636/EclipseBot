@@ -45,7 +45,7 @@ public class BotInitiation {
             e.printStackTrace();
         }
         assert jda != null;
-        jda.getPresence().setActivity(Activity.watching("-help"));
+        jda.getPresence().setActivity(Activity.watching("?help"));
         jda.addEventListener(new Listener(waiter), waiter);
     }
 
