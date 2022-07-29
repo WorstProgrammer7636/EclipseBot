@@ -29,7 +29,7 @@ public class CommandManager {
         addCommand(new WebhookCommand());
         addCommand(new WolframCommand());
         addCommand(new JokeCommand());
-        addCommand(new InstagramCommand());
+        //addCommand(new InstagramCommand());
         addCommand(new SetPrefixCommand());
         addCommand(new MinecraftCommand());
         addCommand(new JoinCommand());
@@ -48,12 +48,13 @@ public class CommandManager {
         addCommand(new TicTacToe(waiter));
         addCommand(new ShuffleCommand());
         addCommand(new ConnectFour(waiter));
-        addCommand(new WordBomb(waiter));
-        addCommand(new StrategicTicTacToe(waiter));
-        addCommand(new Monopoly(waiter));
+        //addCommand(new WordBomb(waiter));
+        //addCommand(new StrategicTicTacToe(waiter));
+        //addCommand(new Monopoly(waiter));
         addCommand(new FlipCoin());
-        addCommand(new GetPlatform());
+        //addCommand(new GetPlatform());
         addCommand(new getInviteLink());
+        addCommand(new RPS(waiter));
     }
 
     private void addCommand(ICommand cmd) {
