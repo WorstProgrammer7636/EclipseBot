@@ -41,11 +41,18 @@ public class WolframCommand implements ICommand {
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
             String line;
             while ((line = in.readLine()) != null) {
+                if (line.length() > 1999){
+                    channel.sendMessage("The question you asked provoked a response of " +
+                            "more than 2000 characters, the discord limit. Please ask" +
+                            " a different question").queue();
+                    return;
+                }
                 channel.sendMessage("ANSWER IS: " + line).queue();
             }
             in.close();
         } catch (IOException pp){
-            channel.sendMessage("The engine did not understand your question. Please ask something else. Example: -wolfram integrate 3sin(x)").queue();
+            pp.printStackTrace();
+            channel.sendMessage("The engine could not find an answer to that question. Please ask something else. Example: -wolfram integrate 3sin(x)").queue();
         }
 
     }
