@@ -46,8 +46,6 @@
       <change afterPath="$PROJECT_DIR$/../ENCRYPTION/src/ProgramRun.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Email/Email.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Email/src/main/java/SendEmail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/GetPlatform.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/getInviteLink.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../JustForFun/JustForFun.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Project110/Project110.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Quarantine Projects/.idea/activation.jar" afterDir="false" />
@@ -82,34 +80,10 @@
       <change afterPath="$PROJECT_DIR$/../VeryForFun/VeryForFun.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../VeryForFun/src/main/java/Experimental.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../VeryForFun/src/main/java/Help.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prefixestemplate" beforeDir="false" afterPath="$PROJECT_DIR$/prefixestemplate" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jda/BotInitiation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/BotInitiation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/CommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/Listener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/Listener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/command/ICommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/command/ICommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/standardcommand/EventWaiterExampleCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/standardcommand/LanguageList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/LanguageList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/standardcommand/Translate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/Translate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/standardcommand/WolframCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/WolframCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/standardcommand/games/ConnectFour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/games/ConnectFour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/standardcommand/games/TicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/games/TicTacToe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/standardcommand/games/WordBomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/games/WordBomb.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/jda/BotInitiation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/BotInitiation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/CommandManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/CommandManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/Listener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/Listener$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/Listener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/Listener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/command/ICommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/command/ICommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/standardcommand/EventWaiterExampleCommand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/standardcommand/LanguageList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/standardcommand/LanguageList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/standardcommand/Translate.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/standardcommand/Translate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/standardcommand/WolframCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/standardcommand/WolframCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/standardcommand/games/ConnectFour.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/standardcommand/games/ConnectFour.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/standardcommand/games/Monopoly.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/standardcommand/games/Monopoly.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/standardcommand/games/StrategicTicTacToe.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/standardcommand/games/StrategicTicTacToe.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/standardcommand/games/WordBomb.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/standardcommand/games/WordBomb.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/jda/standardcommand/getInviteLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/standardcommand/getInviteLink.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PA1/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../PA1/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../PA1/.idea/modules.xml" beforeDir="false" />
@@ -434,6 +408,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="EventWaiterExampleCommand!&#10;ResumeCommand!&#10;Bug Fixes, Reformatting, added functionality for everything else" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="508" y="210" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1659069408830">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="508" y="210" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.816@0.0.1536.816" timestamp="1659069408830" />
     <state x="574" y="115" key="#com.intellij.ide.util.MemberChooser" timestamp="1659066970344">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
@@ -442,22 +420,22 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.816@0.0.1536.816" timestamp="1659062303381" />
-    <state width="1493" height="80" key="GridCell.Tab.0.bottom" timestamp="1659068018178">
+    <state width="1493" height="80" key="GridCell.Tab.0.bottom" timestamp="1659068696428">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="80" key="GridCell.Tab.0.bottom/0.0.1536.816@0.0.1536.816" timestamp="1659068018178" />
-    <state width="1493" height="80" key="GridCell.Tab.0.center" timestamp="1659068018177">
+    <state width="1493" height="80" key="GridCell.Tab.0.bottom/0.0.1536.816@0.0.1536.816" timestamp="1659068696428" />
+    <state width="1493" height="80" key="GridCell.Tab.0.center" timestamp="1659068696428">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="80" key="GridCell.Tab.0.center/0.0.1536.816@0.0.1536.816" timestamp="1659068018177" />
-    <state width="1493" height="80" key="GridCell.Tab.0.left" timestamp="1659068018177">
+    <state width="1493" height="80" key="GridCell.Tab.0.center/0.0.1536.816@0.0.1536.816" timestamp="1659068696428" />
+    <state width="1493" height="80" key="GridCell.Tab.0.left" timestamp="1659068696428">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="80" key="GridCell.Tab.0.left/0.0.1536.816@0.0.1536.816" timestamp="1659068018177" />
-    <state width="1493" height="80" key="GridCell.Tab.0.right" timestamp="1659068018178">
+    <state width="1493" height="80" key="GridCell.Tab.0.left/0.0.1536.816@0.0.1536.816" timestamp="1659068696428" />
+    <state width="1493" height="80" key="GridCell.Tab.0.right" timestamp="1659068696428">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="80" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1659068018178" />
+    <state width="1493" height="80" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1659068696428" />
     <state x="469" y="166" key="refactoring.ChangeSignatureDialog" timestamp="1659064652689">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
