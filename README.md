@@ -1,4 +1,5 @@
-# InutileV2
+# InutileBot
 
 New Code for Inutile Bot, previous code especially inefficient.
-# InutileBot
+Note: When you add this bot into your discord server, the default command prefix is "?" for example "?help"
+
