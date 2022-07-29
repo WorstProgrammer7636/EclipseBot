@@ -52,7 +52,7 @@ public class CommandManager {
         //addCommand(new StrategicTicTacToe(waiter));
         //addCommand(new Monopoly(waiter));
         addCommand(new FlipCoin());
-        //addCommand(new GetPlatform());
+        addCommand(new GetPlatform());
         addCommand(new getInviteLink());
         addCommand(new RPS(waiter));
     }
