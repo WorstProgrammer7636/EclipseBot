@@ -12,6 +12,24 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Translate implements ICommand {
+    String languageToTranslate;
+    public void checkCommonLanguageInput(){
+        if (languageToTranslate.equalsIgnoreCase("english")){
+            languageToTranslate = "en";
+        } else if (languageToTranslate.equalsIgnoreCase("spanish")){
+            languageToTranslate = "es";
+        } else if (languageToTranslate.equalsIgnoreCase("french")){
+            languageToTranslate = "fr";
+        } else if (languageToTranslate.equalsIgnoreCase("chinese")){
+            languageToTranslate = "zh";
+        } else if (languageToTranslate.equalsIgnoreCase("korean")){
+            languageToTranslate = "ko";
+        } else if (languageToTranslate.equalsIgnoreCase("japanese")){
+            languageToTranslate = "ja";
+        } else if (languageToTranslate.equalsIgnoreCase("russian")){
+            languageToTranslate = "ru";
+        }
+    }
 
     @Override
     public void handle(CommandContext ctx) throws IOException {
@@ -39,7 +57,9 @@ public class Translate implements ICommand {
                 "sk", "sl", "sm", "sn", "so", "sq", "sr", "ss", "st", "su", "sv", "sw", "ta", "te", "tg", "th", "ti", "tk", "tl", "tn", "to", "tr", "ts", "tt", "tw", "ty",
                 "ug", "uk", "ur", "uz", "ve", "vi", "vo", "wa", "wo", "xh", "yi", "yo", "za", "zu"));
 
-        String languageToTranslate = args.get(0);
+        languageToTranslate = args.get(0);
+        checkCommonLanguageInput();
+
         if (!languages.contains(languageToTranslate)) {
             channel.sendMessage("That language abbreviation is unknown!").queue();
             return;

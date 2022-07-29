@@ -20,7 +20,7 @@ public class BotInitiation {
     static EventWaiter waiter = new EventWaiter();
 
     public static void main(String[] args) throws LoginException, InterruptedException {
-        WebUtils.setUserAgent("Mozilla/5.0 Inutile#3903 / hold up#0001");
+        WebUtils.setUserAgent("Mozilla/5.0 Inutile#3903 / spicyburrito#0001");
         Random random = new Random();
         final float hue = random.nextFloat();
         final float saturation = 0.9f;// 1.0 for brilliant, 0.0 for dull
@@ -35,7 +35,8 @@ public class BotInitiation {
                 .setChunkingFilter(ChunkingFilter.ALL).setMemberCachePolicy(MemberCachePolicy.ALL)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS,
                         GatewayIntent.GUILD_VOICE_STATES,
-                        GatewayIntent.GUILD_MESSAGE_REACTIONS)
+                        GatewayIntent.GUILD_MESSAGE_REACTIONS,
+                        GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MESSAGES)
                 .enableCache(CacheFlag.VOICE_STATE);
         JDA jda = null;
         try {
@@ -46,7 +47,6 @@ public class BotInitiation {
         assert jda != null;
         jda.getPresence().setActivity(Activity.watching("Bedr Togedr"));
         jda.addEventListener(new Listener(waiter), waiter);
-
     }
 
 }

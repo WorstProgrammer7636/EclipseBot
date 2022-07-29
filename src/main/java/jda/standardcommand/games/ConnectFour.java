@@ -1,4 +1,4 @@
-package jda.standardcommand;
+package jda.standardcommand.games;
 
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import jda.command.CommandContext;
@@ -118,7 +118,7 @@ public class ConnectFour implements ICommand {
 
 
                     },
-                    5, TimeUnit.SECONDS,
+                    10, TimeUnit.SECONDS,
                     () -> channel.sendMessage("You didn't respond in time").queue()
             );
         });
@@ -204,7 +204,7 @@ public class ConnectFour implements ICommand {
 
                     },
                     60, TimeUnit.SECONDS,
-                    () -> channel.sendMessage("Cmon you had 20 seconds to make a move, you slow duck").queue()
+                    () -> channel.sendMessage("Cmon you had 60 seconds to make a move, you slow duck").queue()
             );
         });
     }

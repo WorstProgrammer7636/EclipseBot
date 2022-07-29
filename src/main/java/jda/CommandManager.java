@@ -5,14 +5,12 @@ import jda.command.CommandContext;
 import jda.command.ICommand;
 import jda.standardcommand.*;
 import jda.standardcommand.admin.SetPrefixCommand;
-import jda.standardcommand.games.ConnectFour;
-import jda.standardcommand.games.StrategicTicTacToe;
-import jda.standardcommand.games.TicTacToe;
-import jda.standardcommand.games.WordBomb;
+import jda.standardcommand.games.*;
 import jda.standardcommand.music.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,11 +29,9 @@ public class CommandManager {
         addCommand(new WebhookCommand());
         addCommand(new WolframCommand());
         addCommand(new JokeCommand());
-        //IMPORTANT: INSTAGRAM API DOES NOT WORK, DO NOT TRY TO USE THIS COMMAND, THIS IS ONLY FOR EDUCATION PURPOSES
         addCommand(new InstagramCommand());
         addCommand(new SetPrefixCommand());
         addCommand(new MinecraftCommand());
-        addCommand(new EventWaiterExampleCommand(waiter));
         addCommand(new JoinCommand());
         addCommand(new PlayCommand());
         addCommand(new ClearCommand());
@@ -54,6 +50,10 @@ public class CommandManager {
         addCommand(new ConnectFour(waiter));
         addCommand(new WordBomb(waiter));
         addCommand(new StrategicTicTacToe(waiter));
+        addCommand(new Monopoly(waiter));
+        addCommand(new FlipCoin());
+        addCommand(new GetPlatform());
+        addCommand(new getInviteLink());
     }
 
     private void addCommand(ICommand cmd) {
@@ -80,7 +80,7 @@ public class CommandManager {
         return null;
     }
 
-    void handle(GuildMessageReceivedEvent event, String prefix) throws IOException {
+    void handle(GuildMessageReceivedEvent event, String prefix) throws IOException, GeneralSecurityException {
         String[] split = event.getMessage().getContentRaw()
                 .replaceFirst("(?i)" + Pattern.quote(prefix), "").split("\\s+");
 

@@ -7,43 +7,54 @@ import jda.command.ICommand;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.Socket;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class WordBomb implements ICommand {
+public class WordBomb implements ICommand  {
     private final EventWaiter waiter;
     final String[] twoLetterWordPrompts =
             {"A", "AD", "AG", "AL", "AM", "AN", "AP", "AR", "AF", "AS", "AT", "BO", "CA", "CO", "CU", "DE", "DI", "EA", "EB", "EC", "ED", "EL", "EM", "EN", "ER", "ES", "ET",
                     "HE", "HI", "HO", "I", "IC", "ID", "IL", "IN", "IS", "L", "LA", "LE", "LI", "LO", "LU", "MA", "ME", "MI", "MO", "NA", "NE", "NU", "OF", "OM", "ON", "OR", "PA", "PH", "RA",
                     "RI", "RO", "SE", "TA", "TE", "TG", "TH", "TI", "TO", "XA", "KA", "WA", "TL", "XA"};
     final String[] threeLetterWordPrompts = {"ONO", "ILI", "AKI", "ATE", "ATI", "ATO", "ENA", "ENO", "ERO", "ETI", "IRA", "OCO", "OHA", "OPI", "REE", "RET", "SAP", "TER", "TIN", "UGI", "URI", "VAC", "URU", "CAN"};
-    ArrayList<Long> players = new ArrayList<Long>();
+    HashMap<Long, Integer> players = new HashMap<Long, Integer>();
+    ArrayList<Long> playersID = new ArrayList<Long>();
     ArrayList<String> usedWords = new ArrayList<String>();
+    ArrayList<String> bannedWords = new ArrayList<>();
     List<User> invitedPlayers;
     ArrayList<String> actualInvitedPlayers = new ArrayList<String>();
     int[] playerLives;
     int turnsElapsed = 0;
     int timeForResponse = 10000;
+    int displayTimerNumber = 0;
     boolean shootThreeWords = false;
     GuildMessageReceivedEvent globalE;
     String prompt = "";
-    String errorReason1 = "That word has already been typed by another user. You will be instantly eliminated if you fail to type an existing word this time.";
-    String errorReason2 = "That word doesn't exist. You will be instantly eliminated if you fail to type an existing word this time.";
-    String errorReason3 = "You didn't respond in time.";
+    String errorReason1 = "That word has already been typed by another user";
+    String errorReason2 = "That word doesn't exist";
+    String errorReason3 = "You didn't respond in time";
     String errorReason4 = "Your word didn't contain the prompt letters";
     Random rand = new Random();
     public WordBomb(EventWaiter waiter){
         this.waiter = waiter;
     }
+
+    public void fillBannedWords(){
+        bannedWords.add("nigger");
+        bannedWords.add("penis");
+        bannedWords.add("fuck");
+        bannedWords.add("fucking");
+        bannedWords.add("faggot");
+    }
+
 
     public void starting(CommandContext ctx, TextChannel channel){
         channel.sendMessage("You started a game of word bomb. Would you like it to be public or private?").queue((message) -> {
@@ -57,7 +68,8 @@ public class WordBomb implements ICommand {
                     },
                     (e) -> {
                         players.clear();
-                        players.add(e.getAuthor().getIdLong());
+                        playersID.add(e.getAuthor().getIdLong());
+                        players.put(e.getAuthor().getIdLong(), 3);
                         actualInvitedPlayers.clear();
                         if (e.getMessage().getContentRaw().equalsIgnoreCase("public")){
                             channel.sendMessage("This option is still undergoing development, please select the private option").queue();
@@ -103,8 +115,7 @@ public class WordBomb implements ICommand {
     public void waitForPlayers(CommandContext ctx, TextChannel channel){
         if (actualInvitedPlayers.size() == 0){
             channel.sendMessage("Everyone has accepted. Getting started").queue();
-            playerLives = new int[players.size()];
-            Arrays.fill(playerLives, 3);
+            usedWords.clear();
             game(ctx, channel);
             return;
         }
@@ -113,7 +124,8 @@ public class WordBomb implements ICommand {
                         actualInvitedPlayers.contains(String.valueOf(e.getAuthor())) && e.getMessage().getContentRaw().equalsIgnoreCase("ACCEPT"),
                 e -> {
                     channel.sendMessage("A player joined").queue();
-                    players.add(e.getAuthor().getIdLong());
+                    players.put(e.getAuthor().getIdLong(), 3);
+                    playersID.add(e.getAuthor().getIdLong());
                     actualInvitedPlayers.remove(String.valueOf(e.getAuthor()));
                     waitForPlayers(ctx, channel);
                 },15, TimeUnit.SECONDS, () ->
@@ -160,16 +172,9 @@ public class WordBomb implements ICommand {
     }
 
     public boolean wordIsUsed(String input){
-        if (usedWords.contains(input)){
-            return true;
-        }
-
-        return false;
+        return usedWords.contains(input);
     }
 
-    public void checkIfWordIsValid(String input, CommandContext ctx, TextChannel channel, GuildMessageReceivedEvent e){
-
-    }
 
     public void game(CommandContext ctx, TextChannel channel) {
         if (players.size() == 1){
@@ -188,14 +193,35 @@ public class WordBomb implements ICommand {
 
 
         double timeForResponseSeconds = (double) timeForResponse / 1000;
-        String currentUsersTurn = "It is <@" + players.get(turnsElapsed % players.size()) + ">'s turn\n" +
+        String currentUsersTurn = "It is <@" + playersID.get(turnsElapsed % players.size()) + ">'s turn\n" +
                 "Time left: " + timeForResponseSeconds + " seconds\n" +
                 "Prompt: " + prompt;
+
+        //BETA TIMER IS HERE
         channel.sendMessage(currentUsersTurn).queue();
+        displayTimerNumber = (int) timeForResponseSeconds;
+        channel.sendMessage(timeForResponseSeconds + "").queue(timerMessage -> {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if (displayTimerNumber < 1){
+                        timer.cancel();
+                        displayTimerNumber = 0;
+                    }
+                    System.out.println("Running: " + new java.util.Date());
+                    timerMessage.editMessage("" + displayTimerNumber).queue();
+                    displayTimerNumber--;
+                }
+            }, 0, 1000);
+        });
+        //BETA TIMER ENDS HERE
+
+
         this.waiter.waitForEvent(GuildMessageReceivedEvent.class, e -> {
                     long nchannel = e.getChannel().getIdLong();
                     long nuser = e.getMember().getUser().getIdLong();
-                    return ctx.getChannel().getIdLong() == nchannel && nuser == players.get(turnsElapsed % players.size());
+                    return ctx.getChannel().getIdLong() == nchannel && nuser == playersID.get(turnsElapsed % players.size());
                 }, e -> {
                     globalE = e;
                     String input = e.getMessage().getContentRaw();
@@ -203,8 +229,8 @@ public class WordBomb implements ICommand {
                     StringBuffer response2 = fetchAPI2(input);
 
                     try {
-                        if (wordIsUsed(input)){
-                            secondInputAttempt(ctx, channel, e, errorReason1);
+                        if (wordIsUsed(input) || bannedWords.contains(input)){
+                            playerFailure(e, errorReason1, channel, ctx);
                         } else if (response.toString().startsWith("meta", 3) || response2.toString().startsWith("meta", 3)){
                             if (input.contains(prompt) || input.contains(prompt.toLowerCase())){
                                 channel.sendMessage("Success. That word exists").queue();
@@ -215,107 +241,34 @@ public class WordBomb implements ICommand {
                                 turnsElapsed++;
                                 game(ctx, channel);
                             } else {
-                                secondInputAttempt(ctx, channel, e, errorReason4);
+                                playerFailure(e, errorReason4, channel, ctx);
                             }
 
                         } else {
-                            secondInputAttempt(ctx, channel, e, errorReason2);
+                            playerFailure(e, errorReason2, channel, ctx);
                         }
                     } catch (Exception pp){
-                        secondInputAttempt(ctx, channel, e, errorReason2);
+                        playerFailure(e, errorReason2, channel, ctx);
                     }
                 },
                 timeForResponse, TimeUnit.MILLISECONDS, () ->
                 {
-                    secondInputAttempt(ctx, channel, globalE, errorReason3);
+                    playerFailure(globalE, errorReason3, channel, ctx);
                 });
     }
-
-    public void secondInputAttempt(CommandContext ctx, TextChannel channel, GuildMessageReceivedEvent event, String errorReason){
-        double timeForResponseSeconds2 = (double) timeForResponse / 1000;
-        channel.sendMessage(errorReason + " Try again and type another word in the next " + timeForResponseSeconds2 + " seconds").queue();
-        this.waiter.waitForEvent(GuildMessageReceivedEvent.class, e -> {
-            long nchannel = e.getChannel().getIdLong();
-            long nuser = e.getMember().getUser().getIdLong();
-            return nuser == players.get(turnsElapsed % players.size());
-        }, e -> {
-            String input = e.getMessage().getContentRaw();
-            try {
-                String apiKey1 = Config.get("collegiateapi");
-                String apiKey2 = Config.get("medicalapi");
-                String url = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + input + "?key=" + apiKey1;
-                String url2 = "https://www.dictionaryapi.com/api/v3/references/medical/json/" + input + "?key=" + apiKey2;
-                URL obj = new URL(url);
-                URL obj2 = new URL(url2);
-                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-                HttpURLConnection con2 = (HttpURLConnection) obj2.openConnection();
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                BufferedReader in2 = new BufferedReader(new InputStreamReader(con2.getInputStream()));
-                String inputLine;
-                String inputLine2;
-                StringBuffer response = new StringBuffer();
-                StringBuffer response2 = new StringBuffer();
-                while ((inputLine = in.readLine()) != null){
-                    response.append(inputLine);
-                }
-
-                while ((inputLine2 = in2.readLine()) != null){
-                    response2.append(inputLine2);
-                }
-
-                in.close();
-                if (usedWords.contains(input)){
-                    channel.sendMessage("You entered a used word again. You're eliminated").queue();
-                    timeForResponse = 10000;
-                    players.remove(e.getAuthor().getIdLong());
-                    turnsElapsed--;
-                    game(ctx, channel);
-                }
-
-
-                try {
-                    if (response.toString().startsWith("meta", 3) || response2.toString().startsWith("meta", 3)){
-                        if (input.contains(prompt) || input.contains(prompt.toLowerCase())){
-                            channel.sendMessage("Success. That word exists").queue();
-                            usedWords.add(input);
-                            if (turnsElapsed % players.size() == players.size() - 1){
-                                timeForResponse -= 500;
-                            }
-                            turnsElapsed++;
-                        } else {
-                            channel.sendMessage("Your word doesn't contain the prompt. You are eliminated").queue();
-                            timeForResponse = 10000;
-                            turnsElapsed--;
-                            shootThreeWords = false;
-                            players.remove(e.getAuthor().getIdLong());
-                        }
-                    } else {
-                        channel.sendMessage("That word doesn't exist. You are eliminated").queue();
-                        players.remove(e.getAuthor().getIdLong());
-                        timeForResponse = 10000;
-                        turnsElapsed--;
-                        shootThreeWords = false;
-                    }
-                } catch (Exception pp){
-                    channel.sendMessage("That word doesn't exist. You are eliminated").queue();
-                    players.remove(e.getAuthor().getIdLong());
-                    timeForResponse = 10000;
-                    turnsElapsed--;
-                    shootThreeWords = false;
-                }
-                game(ctx,channel);
-
-            } catch (IOException pp){
-                pp.printStackTrace();
-            }
-        }, timeForResponse, TimeUnit.MILLISECONDS, () -> {
-            channel.sendMessage("You didn't respond in time. You're out").queue();
-            players.remove(event.getAuthor().getIdLong());
-            timeForResponse = 10000;
-            shootThreeWords = false;
-            game(ctx, channel);
-        });
+    public void playerFailure(GuildMessageReceivedEvent e, String errorReason, TextChannel channel, CommandContext ctx){
+        players.put(e.getAuthor().getIdLong(), players.get(e.getAuthor().getIdLong()) - 1);
+        timeForResponse = 10000;
+        shootThreeWords = false;
+        if (players.get(e.getAuthor().getIdLong()) == 0){
+            players.remove(e.getAuthor().getIdLong());
+            turnsElapsed--;
+        }
+        channel.sendMessage(errorReason + ". You have " + players.get(e.getAuthor().getIdLong()) + " lives left").queue();
+        game(ctx, channel);
     }
+
+
 
     @Override
     public void handle(CommandContext ctx) throws IOException {
@@ -332,4 +285,5 @@ public class WordBomb implements ICommand {
     public String getHelp() {
         return "Play wordbomb with other players";
     }
+
 }

@@ -3,6 +3,8 @@ package jda.standardcommand.games;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import jda.command.CommandContext;
 import jda.command.ICommand;
+import jda.standardcommand.gamesSetupFiles.Node;
+import jda.standardcommand.music.ResumeCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.Member;
@@ -14,26 +16,31 @@ import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEve
 import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.Button;
 import net.dv8tion.jda.api.requests.restaction.MessageAction;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class TicTacToe implements ICommand {
+
+public class StrategicTicTacToe implements ICommand {
     private final EventWaiter waiter;
-    public TicTacToe(EventWaiter waiter) {
+    public StrategicTicTacToe(EventWaiter waiter) {
         this.waiter = waiter;
     }
-
     Random rand = new Random();
     boolean startFirst = false;
     String[][] board = new String[3][3];
     String boardAsString = ":white_large_square::white_large_square::white_large_square:\n:white_large_square::white_large_square:" +
             ":white_large_square:\n:white_large_square::white_large_square::white_large_square:";
     ArrayList<Integer> buttonsAlreadyClicked = new ArrayList<Integer>();
+
+    //
+
+    //
+
 
     /**
      * 1 represents player winning, -1 represents computer winning, 0 represents nobody winning
@@ -108,18 +115,15 @@ public class TicTacToe implements ICommand {
                             startFirst = true;
                         } else if (e.getMessage().getContentRaw().equalsIgnoreCase("no")){
                             channel.sendMessage("You chose not to start first. Let's get started").queue();
-                            //make the bot make a move and edit the board before the game actually starts
-                            while(true){
-                                int randomNumber = rand.nextInt(9);
-                                if (!buttonsAlreadyClicked.contains(randomNumber)){
-                                    int computerXCoordinate = randomNumber / 3;
-                                    int computerYCoordinate = randomNumber % 3;
-                                    board[computerXCoordinate][computerYCoordinate] = ":o:";
-                                    buttonsAlreadyClicked.add(randomNumber);
-                                    updateBoard();
-                                    break;
-                                }
-                            }
+                            //pick a corner spot
+                            int[] possibleFirstMoves = {1,3,7,9};
+                            int choose = rand.nextInt(4);
+                            int randomFirstSquare = possibleFirstMoves[choose] - 1;
+                            int computerXCoordinate = randomFirstSquare / 3;
+                            int computerYCoordinate = randomFirstSquare % 3;
+                            board[computerXCoordinate][computerYCoordinate] = ":o:";
+                            buttonsAlreadyClicked.add(randomFirstSquare);
+                            updateBoard();
 
                         } else {
                             channel.sendMessage("That is not a valid response. Please try this command again.").queue();
@@ -182,6 +186,9 @@ public class TicTacToe implements ICommand {
                         }
 
                         //computer generated move
+                        generateOptimalMove();
+
+                        /*
                         while(true){
                             int randomNumber = rand.nextInt(9);
                             if (!buttonsAlreadyClicked.contains(randomNumber)){
@@ -193,6 +200,7 @@ public class TicTacToe implements ICommand {
                                 break;
                             }
                         }
+                         */
 
                         if (checkWinLose() == -1){
                             channel.sendMessage(boardAsString).queue();
@@ -225,6 +233,14 @@ public class TicTacToe implements ICommand {
 
     }
 
+    public void generateOptimalMove(){
+        if (buttonsAlreadyClicked.size() == 1){
+            //if player chooses corner move, computer does center, if player chooses center, computer does corner, if player choose edge, computer does opposite edge
+        } else if (buttonsAlreadyClicked.size() == 2){
+            //if player chooses edge square, computer does center or corner and wins (depends, figure this out later). if player chooses center, go opposite corner from first corner
+        } // so on
+    }
+
 
 
     @Override
@@ -237,11 +253,11 @@ public class TicTacToe implements ICommand {
 
     @Override
     public String getName() {
-        return "tictactoe";
+        return "impossibletictactoe";
     }
 
     @Override
     public String getHelp() {
-        return "play tictactoe with the bot";
+        return "play tictactoe with the bot, but the bot actually uses its brain";
     }
 }

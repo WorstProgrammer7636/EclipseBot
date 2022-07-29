@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import java.io.*;
+import java.security.GeneralSecurityException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -75,7 +76,7 @@ public class Listener extends ListenerAdapter {
         if (raw.startsWith(prefix)) {
             try {
                 manager.handle(event, prefix);
-            } catch (IOException e) {
+            } catch (IOException | GeneralSecurityException e) {
                 e.printStackTrace();
             }
         }
