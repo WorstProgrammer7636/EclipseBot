@@ -6,6 +6,8 @@ import jda.command.ICommand;
 import me.duncte123.botcommons.messaging.EmbedUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -68,17 +70,16 @@ public class WolframCommand implements ICommand {
             }
             String searchResult = String.join("+", args);
             String apiKey = Config.get("WOLFRAMAPI");
-            String finalURL = "http://api.wolframalpha.com/v2/simple?appid=" + apiKey + "=" + searchResult + "%3F";
-
-            File filePath = new File("/Users/5kyle/Desktop/DiscordWolfram/output.jpg");
+            String finalURL = "https://api.wolframalpha.com/v1/result?appid=" + apiKey + "=" + searchResult + "%3F";
             URL url = new URL(finalURL);
-            BufferedImage image = ImageIO.read(url);
-            if (denyIPAddressRequest(image, channel)){
-                channel.sendMessage("you thought you could dox me bitch. your request has been denied").queue();
-                return;
+            // read text returned by server
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                channel.sendMessage("ANSWER IS: " + line).queue();
             }
-            ImageIO.write(image, "jpg", new File("/Users/5kyle/Desktop/DiscordWolfram/output.jpg"));
-            channel.sendMessage("Here is the answer to your question: ").addFile(filePath).queue();
+            in.close();
+
 
             //EmbedBuilder info = EmbedUtils.embedImageWithTitle(String.join(" ", args), finalURL, finalURL);
             //info.setFooter("Inutile || Image Won't Load? Click on the link!");
