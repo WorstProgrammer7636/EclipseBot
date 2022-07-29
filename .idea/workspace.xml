@@ -46,7 +46,6 @@
       <change afterPath="$PROJECT_DIR$/../ENCRYPTION/src/ProgramRun.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Email/Email.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Email/src/main/java/SendEmail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/games/RPS.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../JustForFun/JustForFun.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Project110/Project110.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Quarantine Projects/.idea/activation.jar" afterDir="false" />
@@ -82,8 +81,11 @@
       <change afterPath="$PROJECT_DIR$/../VeryForFun/src/main/java/Experimental.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../VeryForFun/src/main/java/Help.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jda/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/CommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jda/CommandManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/CommandManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jda/BotInitiation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/BotInitiation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jda/standardcommand/WolframCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jda/standardcommand/WolframCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/jda/BotInitiation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/BotInitiation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/jda/standardcommand/WolframCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jda/standardcommand/WolframCommand.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PA1/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../PA1/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../PA1/.idea/modules.xml" beforeDir="false" />
@@ -420,22 +422,26 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.816@0.0.1536.816" timestamp="1659062303381" />
-    <state width="1493" height="86" key="GridCell.Tab.0.bottom" timestamp="1659074391200">
+    <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1659079250162">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="86" key="GridCell.Tab.0.bottom/0.0.1536.816@0.0.1536.816" timestamp="1659074391200" />
-    <state width="1493" height="86" key="GridCell.Tab.0.center" timestamp="1659074391200">
+    <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1659079250162" />
+    <state width="1493" height="128" key="GridCell.Tab.0.bottom" timestamp="1659079689489">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="86" key="GridCell.Tab.0.center/0.0.1536.816@0.0.1536.816" timestamp="1659074391200" />
-    <state width="1493" height="86" key="GridCell.Tab.0.left" timestamp="1659074391198">
+    <state width="1493" height="128" key="GridCell.Tab.0.bottom/0.0.1536.816@0.0.1536.816" timestamp="1659079689489" />
+    <state width="1493" height="128" key="GridCell.Tab.0.center" timestamp="1659079689488">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="86" key="GridCell.Tab.0.left/0.0.1536.816@0.0.1536.816" timestamp="1659074391198" />
-    <state width="1493" height="86" key="GridCell.Tab.0.right" timestamp="1659074391200">
+    <state width="1493" height="128" key="GridCell.Tab.0.center/0.0.1536.816@0.0.1536.816" timestamp="1659079689488" />
+    <state width="1493" height="128" key="GridCell.Tab.0.left" timestamp="1659079689488">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="86" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1659074391200" />
+    <state width="1493" height="128" key="GridCell.Tab.0.left/0.0.1536.816@0.0.1536.816" timestamp="1659079689488" />
+    <state width="1493" height="128" key="GridCell.Tab.0.right" timestamp="1659079689488">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state width="1493" height="128" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1659079689488" />
     <state x="469" y="166" key="refactoring.ChangeSignatureDialog" timestamp="1659064652689">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
