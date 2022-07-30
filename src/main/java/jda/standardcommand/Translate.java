@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Translate implements ICommand {
@@ -28,6 +29,12 @@ public class Translate implements ICommand {
             languageToTranslate = "ja";
         } else if (languageToTranslate.equalsIgnoreCase("russian")){
             languageToTranslate = "ru";
+        } else if (languageToTranslate.equalsIgnoreCase("greek")){
+            languageToTranslate = "el";
+        } else if (languageToTranslate.equalsIgnoreCase("arabic")){
+            languageToTranslate = "ar";
+        } else if (languageToTranslate.equalsIgnoreCase("albanian")){
+            languageToTranslate = "sq";
         }
     }
 
@@ -38,7 +45,7 @@ public class Translate implements ICommand {
         String sentence = "";
 
         if (args.isEmpty() || args.size() == 1) {
-            channel.sendMessage("Please translate a word or statement. If you don't know the language abbreviations, please do the command ?languagelist").queue();
+            channel.sendMessage("Please translate a word or statement. Example: ?translate spanish please walk the dog.").queue();
             return;
         } else {
             for (int i = 1; i < args.size(); i++) {
@@ -61,7 +68,7 @@ public class Translate implements ICommand {
         checkCommonLanguageInput();
 
         if (!languages.contains(languageToTranslate)) {
-            channel.sendMessage("That language abbreviation is unknown!").queue();
+            channel.sendMessage("That language is not in our database!").queue();
             return;
         }
 
@@ -71,7 +78,13 @@ public class Translate implements ICommand {
         try {
             builder.setTitle("Translation:");
             builder.addField("Original Statement:", sentence, false);
-            builder.addField("Information:", "Expecting to translate from: " + inputLanguage + " to " + languageToTranslate, false);
+
+            //convert iso language to readable language
+            String readable1 = addLanguageList(inputLanguage);
+            String readable2 = addLanguageList(languageToTranslate);
+
+            builder.addField("Information:", "Expecting to translate from: " +
+                    readable1 + " to " + readable2, false);
             builder.setDescription(GoogleTranslate.translate(languageToTranslate, sentence));
             builder.setColor(0x03a5fc);
             builder.setAuthor(ctx.getMember().getEffectiveName());
@@ -86,6 +99,26 @@ public class Translate implements ICommand {
 
     }
 
+    public String addLanguageList(String x){
+        HashMap<String, String> ISOReadables = new HashMap<String, String>();
+        ISOReadables.put("en", "English");
+        ISOReadables.put("es", "Spanish");
+        ISOReadables.put("zh", "Chinese");
+        ISOReadables.put("ru", "Russian");
+        ISOReadables.put("ja", "Japanese");
+        ISOReadables.put("fr", "French");
+        ISOReadables.put("ko", "Korean");
+        ISOReadables.put("el", "Greek");
+        ISOReadables.put("ar", "Arabic");
+        ISOReadables.put("sq", "Albanian");
+
+        try {
+            return ISOReadables.get(x);
+        } catch (Exception e){
+            return x;
+        }
+
+    }
 
 
     @Override
