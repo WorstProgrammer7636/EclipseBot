@@ -44,7 +44,6 @@ public class CommandManager {
         addCommand(new QueueLoopCommand());
         addCommand(new LeaveCommand());
         addCommand(new Translate());
-        addCommand(new LanguageList());
         addCommand(new TicTacToe(waiter));
         addCommand(new ShuffleCommand());
         addCommand(new ConnectFour(waiter));
@@ -55,6 +54,7 @@ public class CommandManager {
         addCommand(new GetPlatform());
         addCommand(new getInviteLink());
         addCommand(new RPS(waiter));
+        addCommand(new DatabaseHandling());
     }
 
     private void addCommand(ICommand cmd) {
