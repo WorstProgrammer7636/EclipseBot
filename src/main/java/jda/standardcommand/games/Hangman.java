@@ -67,8 +67,8 @@ public class Hangman implements ICommand {
                         return ctx.getChannel().getIdLong() == nchannel && nuser == ctx.getMember().getIdLong();
                     },
                     (e) -> {
-                        List<Member> mentionedMembers = ctx.getMessage().getMentionedMembers();
-                        if (mentionedMembers.size() == 0 || ctx.getMessage().getContentRaw().equalsIgnoreCase("myself")){
+                        List<Member> mentionedMembers = e.getMessage().getMentionedMembers();
+                        if (mentionedMembers.size() == 0 || e.getMessage().getContentRaw().equalsIgnoreCase("myself")){
                             channel.sendMessage("You chose to play by yourself!").queue();
                             players.add(ctx.getMember());
                         } else if (mentionedMembers.size() > 0){
@@ -179,7 +179,6 @@ public class Hangman implements ICommand {
     }
 
     //utilize recursive waiter event until game ends by win or loss
-
     public void initiateGame(CommandContext ctx){
         TextChannel channel = ctx.getChannel();
             this.waiter.waitForEvent(
@@ -239,8 +238,14 @@ public class Hangman implements ICommand {
             ctx.getChannel().sendMessage("Incorrect guess!").queue();
             incorrect++;
         }
+
+        alreadyGuessedLetters.add(input);
     }
 
+    /**
+     * Discord UI
+     * @param ctx
+     */
     public void printDiagram(CommandContext ctx){
         //set up hangman diagram
         String diagram = "+ - - +" +
@@ -311,8 +316,9 @@ public class Hangman implements ICommand {
                     "\n=====";
         }
         EmbedBuilder hangman = new EmbedBuilder();
-        hangman.addField("Your hangman", diagram, true);
-        hangman.addField("Letters", "\n \n \n \n \n" + hangmanLetters, true);
+        hangman.addField("Your Hangman", diagram, true);
+        hangman.addField("Guessed Letters", String.valueOf(alreadyGuessedLetters), true);
+        hangman.addField("Letters", "\n \n" + hangmanLetters, true);
         hangman.setColor(Color.GREEN);
         ctx.getChannel().sendMessage(hangman.build()).queue();
     }
