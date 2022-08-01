@@ -1,3 +1,4 @@
 env
 prefixes
 src/main/java/jda/standardcommand/Email.java
+src/main/java/jda/standardcommand/AdminExec.java
