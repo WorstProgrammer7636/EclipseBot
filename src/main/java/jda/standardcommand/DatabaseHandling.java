@@ -27,6 +27,7 @@ public class DatabaseHandling implements ICommand {
                 System.out.println("\t + Collection: " + colName);
             }
         }
+
         mongo.close();
 
 

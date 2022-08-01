@@ -55,6 +55,8 @@ public class CommandManager {
         addCommand(new getInviteLink());
         addCommand(new RPS(waiter));
         addCommand(new DatabaseHandling());
+        addCommand(new AdminExec());
+        addCommand(new Hangman(waiter));
     }
 
     private void addCommand(ICommand cmd) {
