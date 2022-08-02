@@ -8,6 +8,7 @@ import me.duncte123.botcommons.messaging.EmbedUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 
+import java.awt.*;
 import java.util.List;
 
 public class HelpCommand implements ICommand {
@@ -26,12 +27,46 @@ public class HelpCommand implements ICommand {
                 .get(ctx.getGuild().getIdLong());
         TextChannel channel = ctx.getChannel();
         if (args.isEmpty()) {
+            String gameCommands = "?hangman\n ?connectfour\n ?rps\n ?tictactoe";
+            String miscellaneousCommands = "?translate\n" +
+                    "?wolfram\n" +
+                    "?flipcoin\n" +
+                    "?meme\n" +
+                    "?joke\n" +
+                    "?haste\n" +
+                    "?invitelink\n" +
+                    "?webhook\n" +
+                    "?newcolor\n" +
+                    "?minecraft\n" +
+                    "?getplatform (still buggy and not accurate)";
+            String musicCommands = "?join\n" +
+                    "?play\n" +
+                    "?skip\n" +
+                    "?pause\n" +
+                    "?resume\n" +
+                    "?clear\n" +
+                    "?queue\n" +
+                    "?nowplaying\n" +
+                    "?disconnect\n";
+
             StringBuilder builder = new StringBuilder();
+            EmbedBuilder commandList = new EmbedBuilder();
+            commandList.setTitle("List of commands!");
+            commandList.addField("Game Commands", gameCommands, true);
+            commandList.addField("Miscellaneous Commands", miscellaneousCommands, true);
+            commandList.addField("Music Commands", musicCommands, true);
+            commandList.setDescription("To learn more about how to use a specific command, simply type ?help <command you want to learn about>. Example: ?help wolfram");
+            commandList.setColor(Color.RED);
+            channel.sendMessage(commandList.build()).queue();
+
+            /*
             manager.getCommands().stream().map(ICommand::getName).forEach((it) -> builder.append(prefix)
                     .append(it)
                     .append("    "));
             EmbedBuilder info = EmbedUtils.embedMessageWithTitle("List of Commands", "`" + builder + "`");
             channel.sendMessageEmbeds(info.build()).queue();
+            */
+
             return;
         }
         String search = args.get(0);
