@@ -222,7 +222,7 @@ public class ConnectFour implements ICommand {
 
     @Override
     public String getHelp() {
-        return "Play ConnectFour with the bot";
+        return "Play ConnectFour with the bot. Usage: ?connectfour";
     }
 
     public int checkHorizontal(int x, int y, String color){

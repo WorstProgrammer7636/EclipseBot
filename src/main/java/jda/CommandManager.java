@@ -47,7 +47,7 @@ public class CommandManager {
         addCommand(new TicTacToe(waiter));
         addCommand(new ShuffleCommand());
         addCommand(new ConnectFour(waiter));
-        //addCommand(new WordBomb(waiter));
+        addCommand(new WordBomb(waiter));
         //addCommand(new StrategicTicTacToe(waiter));
         //addCommand(new Monopoly(waiter));
         addCommand(new FlipCoin());

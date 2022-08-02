@@ -22,7 +22,7 @@ public class BotInitiation {
     static EventWaiter waiter = new EventWaiter();
 
     public static void main(String[] args) throws LoginException, InterruptedException {
-        WebUtils.setUserAgent("Mozilla/5.0 Inutile#3903 / spicyburrito#0001");
+        WebUtils.setUserAgent("Mozilla/5.0 Inutile#6243 / spicyburrito#0001");
         Random random = new Random();
         final float hue = random.nextFloat();
         final float saturation = 0.9f;// 1.0 for brilliant, 0.0 for dull

@@ -29,6 +29,6 @@ public class FlipCoin implements ICommand {
 
     @Override
     public String getHelp() {
-        return "flip a coin to get heads or tails";
+        return "flip a coin to get heads or tails. Usage: ?flipcoin";
     }
 }

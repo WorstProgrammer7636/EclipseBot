@@ -127,6 +127,6 @@ public class RPS implements ICommand {
 
     @Override
     public String getHelp() {
-        return "play rock paper scissors with someone. Usage: -rps @yourbuddy";
+        return "play rock paper scissors with someone. Usage/Example: ?rps @user";
     }
 }

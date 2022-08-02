@@ -75,6 +75,6 @@ public class GetPlatform implements ICommand {
 
     @Override
     public String getHelp() {
-        return "get platform of user";
+        return "get platform of user. Example/Usage: ?getplatform @user";
     }
 }

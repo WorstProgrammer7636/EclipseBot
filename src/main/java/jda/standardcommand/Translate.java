@@ -128,6 +128,7 @@ public class Translate implements ICommand {
 
     @Override
     public String getHelp() {
-        return "Translate a word or statement into any language you want! Usage: ?translate [language to translate to] [input]";
+        return "Translate a word or statement into any language you want! Usage: ?translate [language to translate to] [input].\n" +
+                " Example: ?translate spanish please walk my dog.";
     }
 }

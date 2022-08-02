@@ -64,6 +64,7 @@ public class WolframCommand implements ICommand {
 
     @Override
     public String getHelp() {
-        return "Ask Wolphram Alpha A Question! \n Usage: `?wolfram <query>`";
+        return "Ask the powerful Wolphram AI A Question! \n Usage: `?wolfram <your request>`. " +
+                "Example: ?wolfram integrate x/(x^2 - 4)";
     }
 }

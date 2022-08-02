@@ -78,7 +78,7 @@ public class Hangman implements ICommand {
                         getTargetWord(ctx);
                         System.out.println(players);
                     },
-                    30, TimeUnit.SECONDS,
+                    45, TimeUnit.SECONDS,
                     () -> {
                         channel.sendMessage("You took too long to respond. Please try this command again").queue();
                         return;
@@ -113,7 +113,7 @@ public class Hangman implements ICommand {
                             DMUser(ctx, user, content);
                         }
                     },
-                    30, TimeUnit.SECONDS,
+                    90, TimeUnit.SECONDS,
                     () -> {channel.sendMessage("You took too long to respond. Please try this command again").queue();
                     return;}
             );
@@ -162,7 +162,7 @@ public class Hangman implements ICommand {
                                 printDiagram(ctx);
                                 initiateGame(ctx);
                             },
-                            30, TimeUnit.SECONDS,
+                            90, TimeUnit.SECONDS,
                             () -> {
                                 channel.sendMessage("You took too long to respond. Please try this command again").queue();
                                 return;
@@ -212,7 +212,7 @@ public class Hangman implements ICommand {
                         initiateGame(ctx);
 
                     },
-                    60, TimeUnit.SECONDS,
+                    100, TimeUnit.SECONDS,
                     () -> {channel.sendMessage("You took too long to respond. Please try this command again").queue();
                         return;}
             );
@@ -331,6 +331,6 @@ public class Hangman implements ICommand {
 
     @Override
     public String getHelp() {
-        return "play hangman with your friends or yourself";
+        return "play hangman with your friends or yourself. Usage: ?hangman";
     }
 }
