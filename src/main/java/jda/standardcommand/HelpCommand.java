@@ -47,7 +47,8 @@ public class HelpCommand implements ICommand {
                     "?clear\n" +
                     "?queue\n" +
                     "?nowplaying\n" +
-                    "?disconnect\n";
+                    "?disconnect\n" +
+                    "?volume\n";
 
             StringBuilder builder = new StringBuilder();
             EmbedBuilder commandList = new EmbedBuilder();

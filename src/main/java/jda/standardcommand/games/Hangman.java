@@ -40,6 +40,8 @@ public class Hangman implements ICommand {
     public Hangman(EventWaiter waiter) {
         this.waiter = waiter;
     }
+
+
     @Override
     public void handle(CommandContext ctx) throws IOException, GeneralSecurityException {
         players.clear();
@@ -155,9 +157,12 @@ public class Hangman implements ICommand {
                                 System.out.println("Prompt is: " + prompt);
 
                                 DM.sendMessage("Thanks for choosing your prompt.").queue();
-                                channel.sendMessage("The game of hangman is now ongoing. Only people mentioned/pinged by the host are allowed to input" +
-                                        " letters for this game. Anyone else's input will not be accepted." +
-                                        " Finally, please input only ***one letter from a-z*** in the chat.").queue();
+                                channel.sendMessage("The game of hangman has started! Just keep in mind these things and have fun!\n" +
+                                        "1) Only users mentioned by the host will have their inputs accepted by the bot\n" +
+                                        "2) Users must only input single letters from a-z otherwise their input won't be accepted\n" +
+                                        "3) If you feel like you know the prompt, you can take a guess of the whole prompt by typing " +
+                                        "?guess <your guess>\n" +
+                                        "4) Have fun!").queue();
 
                                 printDiagram(ctx);
                                 initiateGame(ctx);
@@ -192,8 +197,18 @@ public class Hangman implements ICommand {
                     (e) -> {
                         //game
                         String input = e.getMessage().getContentRaw().toLowerCase();
-                        if ((input.length() > 1) || (int) input.charAt(0) < 97 || (int) input.charAt(0) > 122){
+                        if (input.equalsIgnoreCase("?guess " + prompt)){
+                            printDiagram(ctx);
+                            channel.sendMessage("Congratulations! You WON!!!! :smile: :partying_face:").queue();
+                            return;
+                        } else if (input.startsWith("?guess ")){
+                            channel.sendMessage("Incorrect guess!").queue();
+                            incorrect++;
+                            printDiagram(ctx);
+                        } else if ((input.length() > 1) || (int) input.charAt(0) < 97 || (int) input.charAt(0) > 122){
                             channel.sendMessage("That is not a valid input. Please try again and input only one letter from a-z.").queue();
+                        } else if (alreadyGuessedLetters.contains(input)){
+                            channel.sendMessage("You already guessed that letter!").queue();
                         } else {
                             checkForLetterInPrompt(ctx, input);
                             printDiagram(ctx);
