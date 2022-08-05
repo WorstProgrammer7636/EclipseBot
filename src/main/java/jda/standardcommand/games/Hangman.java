@@ -14,7 +14,11 @@ import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.Button;
 
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -89,6 +93,34 @@ public class Hangman implements ICommand {
         });
     }
 
+    public void getRandomWord(CommandContext ctx) throws IOException {
+        TextChannel channel = ctx.getChannel();
+        String finalURL = "https://random-word-api.herokuapp.com/word";
+        URL url = new URL(finalURL);
+        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+        String line;
+        while ((line = in.readLine()) != null) {
+            prompt = line.substring(2, line.length() - 2);
+        }
+        in.close();
+        for (int letter = 0; letter < prompt.length(); letter++){
+            if (prompt.charAt(letter) == ' '){
+                hangmanLetters.append(' ');
+            } else {
+                hangmanLetters.append('-');
+            }
+        }
+        channel.sendMessage("The game of hangman has started! Just keep in mind these things and have fun!\n" +
+                "1) Only users mentioned by the host will have their inputs accepted by the bot\n" +
+                "2) Users must only input single letters from a-z otherwise their input won't be accepted\n" +
+                "3) If you feel like you know the prompt, you can take a guess of the whole prompt by typing " +
+                "?guess <your guess>\n" +
+                "4) Have fun!").queue();
+
+        printDiagram(ctx);
+        initiateGame(ctx);
+    }
+
     public void getTargetWord(CommandContext ctx){
         TextChannel channel = ctx.getChannel();
         channel.sendMessage("Cool. Now that we've gotten all users you want to play with, let me know if you " +
@@ -105,8 +137,12 @@ public class Hangman implements ICommand {
                     },
                     (e) -> {
                         if (e.getButton().getId().equals("random")){
-                            //generate word via API (Add feature later)
-                            channel.sendMessage("This feature is not available yet!").queue();
+                            try {
+                                getRandomWord(ctx);
+                                System.out.println(prompt);
+                            } catch (IOException ioException) {
+                                ioException.printStackTrace();
+                            }
 
                         } else if (e.getButton().getId().equals("custom")){
                             //private DM user for custom word
