@@ -1,20 +1,26 @@
 package jda.standardcommand.music;
 
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import jda.command.CommandContext;
 import jda.command.ICommand;
 import jda.lavaplayer.GuildMusicManager;
 import jda.lavaplayer.PlayerManager;
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.GuildVoiceState;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
+import net.dv8tion.jda.api.interactions.components.Button;
 import net.dv8tion.jda.api.managers.AudioManager;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.concurrent.TimeUnit;
 
 public class VolumeCommand implements ICommand {
+    private final EventWaiter waiter;
+
+    public VolumeCommand(EventWaiter waiter) {
+        this.waiter = waiter;
+    }
 
     @Override
     public void handle(CommandContext ctx) throws IOException, GeneralSecurityException {
@@ -37,6 +43,17 @@ public class VolumeCommand implements ICommand {
             return;
         }
 
+        if (volume > 175){
+            cautionWarning(ctx, volume);
+        } else {
+            setVolume(ctx, volume);
+        }
+
+
+    }
+
+    public void setVolume(CommandContext ctx, int volume){
+        final TextChannel channel = ctx.getChannel();
         final Member self = ctx.getSelfMember();
         GuildVoiceState selfVoiceState = self.getVoiceState();
         final AudioManager audioManager = ctx.getGuild().getAudioManager();
@@ -60,7 +77,36 @@ public class VolumeCommand implements ICommand {
 
         final GuildMusicManager musicManager = PlayerManager.getInstance().getMusicManager(ctx.getGuild());
         musicManager.audioPlayer.setVolume(volume);
-        channel.sendMessage("Volume of bot has been sent to " + volume).queue();
+        channel.sendMessage("Volume of bot has been set to " + volume).queue();
+    }
+
+    public void cautionWarning(CommandContext ctx, int volume){
+        final TextChannel channel = ctx.getChannel();
+        channel.sendMessage("Beware! Setting the volume above 175 could cause noticeable earrape due to a large increase" +
+                " in DB. Are you sure you want to proceed with this action?").
+                setActionRows(ActionRow.of(
+                        Button.secondary("1", "YES"),
+                        Button.secondary("2", "NO"))).queue((message) -> {
+
+            this.waiter.waitForEvent(
+                    ButtonClickEvent.class,
+                    (e) -> {
+                        long nchannel = e.getChannel().getIdLong();
+                        long nuser = e.getMember().getUser().getIdLong();
+                        return ctx.getChannel().getIdLong() == nchannel && nuser == ctx.getMember().getIdLong();
+                    },
+                    (e) -> {
+                       if (e.getButton().getLabel().equalsIgnoreCase("YES")){
+                           setVolume(ctx, volume);
+                       } else if (e.getButton().getLabel().equalsIgnoreCase("NO")){
+                           channel.sendMessage("Volume change cancelled").queue();
+                           return;
+                       }
+                    },
+                    15, TimeUnit.SECONDS,
+                    () -> channel.sendMessage("You took too long to respond. Please try this command again").queue()
+            );
+        });
     }
 
     @Override

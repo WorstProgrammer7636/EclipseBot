@@ -57,7 +57,7 @@ public class CommandManager {
         addCommand(new DatabaseHandling());
         addCommand(new AdminExec());
         addCommand(new Hangman(waiter));
-        addCommand(new VolumeCommand());
+        addCommand(new VolumeCommand(waiter));
     }
 
     private void addCommand(ICommand cmd) {
