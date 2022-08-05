@@ -38,6 +38,7 @@ public class JoinCommand implements ICommand {
             channel.sendMessage("Please give me permission to join that voice channel!").queue();
             return;
         }
+        audioManager.setSelfDeafened(true);
         audioManager.openAudioConnection(memberChannel);
         channel.sendMessageFormat("Connecting to `\uD83D\uDD0A %s`", memberChannel.getName()).queue();
         ctx.getMessage().addReaction("✅").queue();
