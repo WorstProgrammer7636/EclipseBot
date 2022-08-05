@@ -14,27 +14,86 @@ import java.util.List;
 
 public class Translate implements ICommand {
     String languageToTranslate;
+    HashMap<String, String> languageCodeList = new HashMap<String, String>();
     public void checkCommonLanguageInput(){
-        if (languageToTranslate.equalsIgnoreCase("english")){
-            languageToTranslate = "en";
-        } else if (languageToTranslate.equalsIgnoreCase("spanish")){
-            languageToTranslate = "es";
-        } else if (languageToTranslate.equalsIgnoreCase("french")){
-            languageToTranslate = "fr";
-        } else if (languageToTranslate.equalsIgnoreCase("chinese")){
-            languageToTranslate = "zh";
-        } else if (languageToTranslate.equalsIgnoreCase("korean")){
-            languageToTranslate = "ko";
-        } else if (languageToTranslate.equalsIgnoreCase("japanese")){
-            languageToTranslate = "ja";
-        } else if (languageToTranslate.equalsIgnoreCase("russian")){
-            languageToTranslate = "ru";
-        } else if (languageToTranslate.equalsIgnoreCase("greek")){
-            languageToTranslate = "el";
-        } else if (languageToTranslate.equalsIgnoreCase("arabic")){
-            languageToTranslate = "ar";
-        } else if (languageToTranslate.equalsIgnoreCase("albanian")){
-            languageToTranslate = "sq";
+        languageToTranslate = languageToTranslate.toLowerCase();
+        languageCodeList.put("english", "en");
+        languageCodeList.put("spanish", "es");
+        languageCodeList.put("french", "fr");
+        languageCodeList.put("chinese", "zh");
+        languageCodeList.put("korean", "ko");
+        languageCodeList.put("japanese", "ja");
+        languageCodeList.put("russian", "ru");
+        languageCodeList.put("greek", "el");
+        languageCodeList.put("arabic", "ar");
+        languageCodeList.put("albanian", "sq");
+        languageCodeList.put("armenian", "hy");
+        languageCodeList.put("german", "de");
+        languageCodeList.put("welsh", "cy");
+        languageCodeList.put("vietnamese", "vi");
+        languageCodeList.put("uzbek", "uz");
+        languageCodeList.put("ukrainian", "uk");
+        languageCodeList.put("turkmen", "tk");
+        languageCodeList.put("turkish", "tr");
+        languageCodeList.put("swedish", "sv");
+        languageCodeList.put("swahili", "sw");
+        languageCodeList.put("sundanese", "su");
+        languageCodeList.put("somali", "so");
+        languageCodeList.put("slovenian", "sl");
+        languageCodeList.put("slovak", "sk");
+        languageCodeList.put("serbian", "sr");
+        languageCodeList.put("samoan", "sm");
+        languageCodeList.put("romanian", "ro");
+        languageCodeList.put("moldavian", "ro");
+        languageCodeList.put("moldovan", "ro");
+        languageCodeList.put("portuguese", "pt");
+        languageCodeList.put("polish", "pl");
+        languageCodeList.put("persian", "fa");
+        languageCodeList.put("norwegian", "no");
+        languageCodeList.put("navajo", "nv");
+        languageCodeList.put("malay", "ms");
+        languageCodeList.put("macedonian", "mk");
+        languageCodeList.put("luxembourgish", "lb");
+        languageCodeList.put("latin", "la");
+        languageCodeList.put("irish", "ga");
+        languageCodeList.put("italian", "it");
+        languageCodeList.put("javanese", "jv");
+        languageCodeList.put("indonesian", "id");
+        languageCodeList.put("hungarian", "hu");
+        languageCodeList.put("icelandic", "is");
+        languageCodeList.put("hebrew", "he");
+        languageCodeList.put("dutch", "nl");
+        languageCodeList.put("flemish", "nl");
+        languageCodeList.put("estonian", "et");
+        languageCodeList.put("finnish", "fi");
+        languageCodeList.put("danish", "da");
+        languageCodeList.put("fijian", "fj");
+        languageCodeList.put("czech", "cs");
+        languageCodeList.put("chechen", "ce");
+        languageCodeList.put("croatian", "hr");
+        languageCodeList.put("cornish", "kw");
+        languageCodeList.put("bulgarian", "bg");
+        languageCodeList.put("burmese", "my");
+        languageCodeList.put("georgian", "ka");
+        try {
+            languageToTranslate = languageCodeList.get(languageToTranslate);
+        } catch (Exception exception){
+            exception.printStackTrace();
+        }
+    }
+
+    public String addLanguageList(String x){
+        HashMap<String, String> ISOReadables = new HashMap<String, String>();
+        for (HashMap.Entry<String, String> entry : languageCodeList.entrySet()){
+            String key = entry.getKey();
+            String value = entry.getValue();
+            ISOReadables.put(value, key);
+        }
+
+        try {
+            return ISOReadables.get(x);
+        } catch (Exception e){
+            return x;
         }
     }
 
@@ -66,7 +125,7 @@ public class Translate implements ICommand {
 
         languageToTranslate = args.get(0);
         checkCommonLanguageInput();
-
+        System.out.println(languageToTranslate);
         if (!languages.contains(languageToTranslate)) {
             channel.sendMessage("That language is not in our database!").queue();
             return;
@@ -82,6 +141,13 @@ public class Translate implements ICommand {
             //convert iso language to readable language
             String readable1 = addLanguageList(inputLanguage);
             String readable2 = addLanguageList(languageToTranslate);
+            if (readable1 == null){
+                readable1 = "Unknown language";
+            }
+
+            if (readable2 == null){
+                readable2 = "Unknown language";
+            }
 
             builder.addField("Information:", "Expecting to translate from: " +
                     readable1 + " to " + readable2, false);
@@ -95,29 +161,6 @@ public class Translate implements ICommand {
 
 
         channel.sendMessage(builder.build()).queue();
-
-
-    }
-
-    public String addLanguageList(String x){
-        HashMap<String, String> ISOReadables = new HashMap<String, String>();
-        ISOReadables.put("en", "English");
-        ISOReadables.put("es", "Spanish");
-        ISOReadables.put("zh", "Chinese");
-        ISOReadables.put("ru", "Russian");
-        ISOReadables.put("ja", "Japanese");
-        ISOReadables.put("fr", "French");
-        ISOReadables.put("ko", "Korean");
-        ISOReadables.put("el", "Greek");
-        ISOReadables.put("ar", "Arabic");
-        ISOReadables.put("sq", "Albanian");
-
-        try {
-            return ISOReadables.get(x);
-        } catch (Exception e){
-            return x;
-        }
-
     }
 
 
