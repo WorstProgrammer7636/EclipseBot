@@ -1,5 +1,5 @@
-#InutileBot
-This is updated code for Inutile Bot since previous code had efficiency problems.
+#EclipseBot
+This is updated code for Eclipse Bot since previous code had efficiency problems.
  Note: When you add this bot into your discord server, the default command prefix is "?" for example "?help".
  
 Bot Invite link: 
