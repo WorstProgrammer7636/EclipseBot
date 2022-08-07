@@ -56,9 +56,10 @@ public class HelpCommand implements ICommand {
             commandList.addField("Game Commands", gameCommands, true);
             commandList.addField("Miscellaneous Commands", miscellaneousCommands, true);
             commandList.addField("Music Commands", musicCommands, true);
-            commandList.setDescription("To learn more about how to use a specific command, simply type ?help <command you want to learn about>. Example: ?help wolfram");
+            commandList.setDescription("To learn more about how to use a specific command, simply type ?help <command you want to learn about>. Example: ?help wolfram\n \n");
+            commandList.appendDescription("[Bot Source Code](https://github.com/WorstProgrammer7636/EclipseBot)\n");
+            commandList.appendDescription("[Invite me to other servers!](https://discord.com/api/oauth2/authorize?client_id=1003478249755656273&permissions=8&scope=bot)");
             commandList.setColor(Color.RED);
-            commandList.setAuthor("CLICK THIS TO INVITE ME TO YOUR OWN SERVER!", "https://discord.com/api/oauth2/authorize?client_id=1003478249755656273&permissions=8&scope=bot");
             channel.sendMessage(commandList.build()).queue();
 
             /*
