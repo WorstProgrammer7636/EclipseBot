@@ -30,7 +30,7 @@ public class Listener extends ListenerAdapter {
     public void onReady(@Nonnull ReadyEvent event) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        long sendGuild = Long.parseLong("770826745887850516");
+        long sendGuild = Long.parseLong("1005738790029099058");
         JDA bot = event.getJDA();
         Objects.requireNonNull(bot.getGuildById(sendGuild)).getTextChannelsByName("bot-status", true).get(0)
                 .sendMessage("Bot is on! Bot was activated at " + dtf.format(now)).queue();
@@ -60,7 +60,7 @@ public class Listener extends ListenerAdapter {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
             JDA bot = event.getJDA();
-            long sendGuild = Long.parseLong("770826745887850516");
+            long sendGuild = Long.parseLong("1005738790029099058");
 
             Objects.requireNonNull(bot.getGuildById(sendGuild)).getTextChannelsByName("bot-status", true).get(0)
                     .sendMessage("Bot is off! Bot was deactivated at " + dtf.format(now)).queue();

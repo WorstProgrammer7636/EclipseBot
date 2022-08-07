@@ -22,7 +22,7 @@ public class BotInitiation {
     static EventWaiter waiter = new EventWaiter();
 
     public static void main(String[] args) throws LoginException, InterruptedException {
-        WebUtils.setUserAgent("Mozilla/5.0 Inutile#6243 / spicyburrito#0001");
+        WebUtils.setUserAgent("Mozilla/5.0 Eclipse#6243 / spicyburrito#0001");
         Random random = new Random();
         final float hue = random.nextFloat();
         final float saturation = 0.9f;// 1.0 for brilliant, 0.0 for dull
@@ -31,7 +31,7 @@ public class BotInitiation {
         EmbedUtils.setEmbedBuilder(
                 () -> new EmbedBuilder()
                         .setColor(color)
-                        .setFooter("Inutile")
+                        .setFooter("Eclipse")
         );
         JDABuilder jdaBuilder = JDABuilder.createDefault(Config.get("token"))
                 .setChunkingFilter(ChunkingFilter.ALL)
