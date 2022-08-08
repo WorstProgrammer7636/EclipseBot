@@ -27,7 +27,7 @@ public class HelpCommand implements ICommand {
                 .get(ctx.getGuild().getIdLong());
         TextChannel channel = ctx.getChannel();
         if (args.isEmpty()) {
-            String gameCommands = "?hangman\n ?connectfour\n ?rps\n ?tictactoe";
+            String gameCommands = "?hangman\n ?connectfour\n ?rps\n ?tictactoe\n ?2048";
             String miscellaneousCommands = "?translate\n" +
                     "?wolfram\n" +
                     "?flipcoin\n" +

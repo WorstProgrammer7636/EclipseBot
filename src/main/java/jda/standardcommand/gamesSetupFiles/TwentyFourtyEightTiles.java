@@ -5,7 +5,7 @@ public class TwentyFourtyEightTiles {
     public String FOUR = ":four:";
     public String EIGHT = ":eight:";
     public String SIXTEEN = ":sixteen:";
-    public String THIRTYTWO = ":thirtytwo:";
+    public String THIRTYTWO = "<:thirtytwoTile:>";
     public String SIXTYFOUR = ":sixtyfour:";
     public String ONETWENTYEIGHT = ":onetwentyeight:";
     public String TWOFIFTYSIX = ":twofiftysix:";

@@ -4,8 +4,10 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import jda.command.CommandContext;
 import jda.command.ICommand;
 import jda.standardcommand.*;
+import jda.standardcommand.admin.FlushServerEmotes;
 import jda.standardcommand.admin.SetPrefixCommand;
 import jda.standardcommand.games.*;
+import jda.standardcommand.gamesSetupFiles.InstallEmotes;
 import jda.standardcommand.music.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -58,6 +60,9 @@ public class CommandManager {
         addCommand(new AdminExec());
         addCommand(new Hangman(waiter));
         addCommand(new VolumeCommand(waiter));
+        addCommand(new GameOf2048(waiter));
+        addCommand(new FlushServerEmotes());
+        addCommand(new InstallEmotes());
     }
 
     private void addCommand(ICommand cmd) {
