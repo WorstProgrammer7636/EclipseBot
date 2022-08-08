@@ -39,9 +39,10 @@ public class BotInitiation {
                         GatewayIntent.GUILD_VOICE_STATES,
                         GatewayIntent.GUILD_MESSAGE_REACTIONS,
                         GatewayIntent.GUILD_MESSAGES,
-                        GatewayIntent.GUILD_PRESENCES
+                        GatewayIntent.GUILD_PRESENCES,
+                        GatewayIntent.GUILD_EMOJIS
                         ).setDisabledCacheFlags(EnumSet.of(
-                        CacheFlag.EMOTE
+                        CacheFlag.ONLINE_STATUS
                 ))
                 .enableCache(CacheFlag.VOICE_STATE).setMemberCachePolicy(MemberCachePolicy.ALL);
         JDA jda = null;
