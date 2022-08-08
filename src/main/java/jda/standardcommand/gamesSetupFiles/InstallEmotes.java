@@ -32,18 +32,40 @@ public class InstallEmotes implements ICommand {
             emoteInfo.put(emotes.get(i).getName(), emotes.get(i).getIdLong());
         }
 
+        if (!emoteInfo.containsKey("2Tile")){
+            ctx.getGuild().createEmote("2Tile", twoIcon).queue();
+        }
 
-        ctx.getGuild().createEmote("2Tile", twoIcon).queue();
-        ctx.getGuild().createEmote("4Tile", fourIcon).queue();
-        ctx.getGuild().createEmote("8Tile", eightIcon).queue();
-        ctx.getGuild().createEmote("16Tile", sixteenIcon).queue();
-        ctx.getGuild().createEmote("32Tile", thirtytwoIcon).queue();
-        ctx.getGuild().createEmote("64Tile", sixtyfourIcon).queue();
-        ctx.getGuild().createEmote("128Tile", onetwentyeightIcon).queue();
-        ctx.getGuild().createEmote("256Tile", twofiftysixIcon).queue();
-        ctx.getGuild().createEmote("512Tile", fivetwelveIcon).queue();
-        ctx.getGuild().createEmote("1024Tile", onezerotwofourIcon).queue();
-        ctx.getGuild().createEmote("2048Tile", twentyfourtyeightIcon).queue();
+        if (!emoteInfo.containsKey("4Tile")){
+            ctx.getGuild().createEmote("4Tile", fourIcon).queue();
+        }
+        if (!emoteInfo.containsKey("8Tile")){
+            ctx.getGuild().createEmote("8Tile", eightIcon).queue();
+        }
+        if (!emoteInfo.containsKey("16Tile")){
+            ctx.getGuild().createEmote("16Tile", sixteenIcon).queue();
+        }
+        if (!emoteInfo.containsKey("32Tile")){
+            ctx.getGuild().createEmote("32Tile", thirtytwoIcon).queue();
+        }
+        if (!emoteInfo.containsKey("64Tile")){
+            ctx.getGuild().createEmote("64Tile", sixtyfourIcon).queue();
+        }
+        if (!emoteInfo.containsKey("128Tile")){
+            ctx.getGuild().createEmote("128Tile", onetwentyeightIcon).queue();
+        }
+        if (!emoteInfo.containsKey("256Tile")){
+            ctx.getGuild().createEmote("256Tile", twofiftysixIcon).queue();
+        }
+        if (!emoteInfo.containsKey("512Tile")){
+            ctx.getGuild().createEmote("512Tile", fivetwelveIcon).queue();
+        }
+        if (!emoteInfo.containsKey("1024Tile")){
+            ctx.getGuild().createEmote("1024Tile", onezerotwofourIcon).queue();
+        }
+        if (!emoteInfo.containsKey("2048Tile")){
+            ctx.getGuild().createEmote("2048Tile", twentyfourtyeightIcon).queue();
+        }
 
         ctx.getChannel().sendMessage("Finished installing emotes").queue();
     }
