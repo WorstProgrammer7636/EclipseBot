@@ -58,7 +58,8 @@ public class HelpCommand implements ICommand {
             commandList.addField("Music Commands", musicCommands, true);
             commandList.setDescription("To learn more about how to use a specific command, simply type ?help <command you want to learn about>. Example: ?help wolfram\n \n");
             commandList.appendDescription("[Bot Source Code](https://github.com/WorstProgrammer7636/EclipseBot)\n");
-            commandList.appendDescription("[Invite me to other servers!](https://discord.com/api/oauth2/authorize?client_id=1003478249755656273&permissions=8&scope=bot)");
+            commandList.appendDescription("[Invite me to other servers!](https://discord.com/api/oauth2/authorize?client_id=1003478249755656273&permissions=8&scope=bot)\n");
+            commandList.appendDescription("[Support and Vote for me on Top.GG!](https://top.gg/bot/1003478249755656273/vote)");
             commandList.setColor(Color.RED);
             channel.sendMessage(commandList.build()).queue();
 
