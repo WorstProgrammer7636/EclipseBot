@@ -47,7 +47,6 @@ public class GameOf2048 implements ICommand {
     }
 
     public String displayEmotes(HashMap<String, Long> emoteInfo, String emoteToGet){
-        System.out.println("<:" + emoteToGet + ":" + emoteInfo.get(emoteToGet) + ">");
         return "<:" + emoteToGet + ":" + emoteInfo.get(emoteToGet) + ">";
     }
 
@@ -134,11 +133,17 @@ public class GameOf2048 implements ICommand {
             }
             display += "\n";
         }
+        String upButton = "upButton" + ctx.getAuthor().getIdLong();
+        String leftButton = "leftButton" + ctx.getAuthor().getIdLong();
+        String downButton = "downButton" + ctx.getAuthor().getIdLong();
+        String rightButton = "rightButton" + ctx.getAuthor().getIdLong();
+        String quitButton = "quitButton" + ctx.getAuthor().getIdLong();
+
         ctx.getChannel().sendMessage(display).setActionRows(
-                ActionRow.of(Button.secondary("upButton", "⬆️"), Button.danger(userID, "QUIT")),
-                ActionRow.of(Button.secondary("leftButton", "⬅️"),
-                        Button.secondary("downButton", "⬇️"),
-                        Button.secondary("rightButton", "➡️"))).queue();
+                ActionRow.of(Button.secondary(upButton, "⬆️"), Button.danger(quitButton, "QUIT")),
+                ActionRow.of(Button.secondary(leftButton, "⬅️"),
+                        Button.secondary(downButton, "⬇️"),
+                        Button.secondary(rightButton, "➡️"))).queue();
     }
 
     public String updatedBoard(String[][] board){
@@ -164,16 +169,21 @@ public class GameOf2048 implements ICommand {
                 },
                 (e) -> {
                     String originalCopyOfBoard = updatedBoard(board);
-                    if (e.getButton().getId().equalsIgnoreCase("upButton")){
+                    if (e.getButton().getId().equalsIgnoreCase("upButton" + ctx.getAuthor().getIdLong())){
                         moveTilesUp(ctx, board, tile, emoteInfo);
-                    } else if (e.getButton().getId().equalsIgnoreCase("leftButton")){
+                    } else if (e.getButton().getId().equalsIgnoreCase("leftButton" + ctx.getAuthor().getIdLong())){
                         moveTilesLeft(ctx, board, tile, emoteInfo);
-                    } else if (e.getButton().getId().equalsIgnoreCase("downButton")){
+                    } else if (e.getButton().getId().equalsIgnoreCase("downButton" + ctx.getAuthor().getIdLong())){
                         moveTilesDown(ctx, board, tile, emoteInfo);
-                    } else if (e.getButton().getId().equalsIgnoreCase("rightButton")){
+                    } else if (e.getButton().getId().equalsIgnoreCase("rightButton" + ctx.getAuthor().getIdLong())){
                         moveTilesRight(ctx, board, tile, emoteInfo);
-                    } else if (e.getButton().getId().equalsIgnoreCase(userID)){
+                    } else if (e.getButton().getId().equalsIgnoreCase("quitButton" + ctx.getAuthor().getIdLong())){
                         ctx.getChannel().sendMessage("You quit the game").queue();
+                        return;
+                    } else {
+                        String disqualifiedUser = "<@" + e.getMember().getUser().getIdLong() + ">";
+                        ctx.getChannel().sendMessage(disqualifiedUser + " You were automatically disqualified from your game for " +
+                                "trying to play someone else's game. Please don't do that EVER!!").queue();
                         return;
                     }
 
@@ -187,8 +197,6 @@ public class GameOf2048 implements ICommand {
 
                     //edit board
                     e.editMessage(updatedBoard(board)).queue();
-
-
                     startGame(ctx, board, tile, emoteInfo);
 
                 },
