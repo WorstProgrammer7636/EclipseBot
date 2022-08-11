@@ -69,12 +69,14 @@ public class InstallEmotes implements ICommand {
                 ctx.getGuild().createEmote("2048Tile", twentyfourtyeightIcon).queue();
             }
 
-            ctx.getChannel().sendMessage("Finished installing emotes").queue();
+            ctx.getChannel().sendMessage("Finished installing emotes. You can now run the ?2048 command!").queue();
         } catch (InsufficientPermissionException exception){
             ctx.getChannel().sendMessage("I don't have permission to perform this command!").queue();
             return;
         } catch (Exception e){
-            ctx.getChannel().sendMessage("I can't perform this action!!").queue();
+            ctx.getChannel().sendMessage("I can't perform this action!! Please make sure you have at least" +
+                    " 11 available slots for me to install my emotes in your server. You can do this by deleting some server emotes " +
+                    "to free up space or you can boost your server to increase your server emote capacity.").queue();
         }
     }
 
