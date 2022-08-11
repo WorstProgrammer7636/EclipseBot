@@ -34,12 +34,8 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class Hangman implements ICommand {
-    ArrayList<Member> players = new ArrayList<Member>();
     private final EventWaiter waiter;
-    String prompt;
-    int incorrect = 0;
-    ArrayList<String> alreadyGuessedLetters = new ArrayList<>();
-    StringBuilder hangmanLetters = new StringBuilder();
+
 
     public Hangman(EventWaiter waiter) {
         this.waiter = waiter;
@@ -48,18 +44,20 @@ public class Hangman implements ICommand {
 
     @Override
     public void handle(CommandContext ctx) throws IOException, GeneralSecurityException {
-        players.clear();
-        prompt = "";
-        incorrect = 0;
-        alreadyGuessedLetters.clear();
-        hangmanLetters = new StringBuilder();
+        ctx.getChannel().sendMessage("Note: This game is still in beta mode. Please contact dev (spicyburrito#0001) if you find any bug right now!").queue();
+        ArrayList<Member> players = new ArrayList<Member>();
+        String prompt = "";
+        final int[] incorrect = {0};
+        ArrayList<String> alreadyGuessedLetters = new ArrayList<>();
+        StringBuilder hangmanLetters = new StringBuilder();
         TextChannel channel = ctx.getChannel();
         final List<String> args = ctx.getArgs();
 
-        getPlayerQuantity(ctx);
+        getPlayerQuantity(ctx, players, prompt, incorrect, alreadyGuessedLetters, hangmanLetters);
     }
 
-    public void getPlayerQuantity(CommandContext ctx){
+    public void getPlayerQuantity(CommandContext ctx, ArrayList<Member> players, String prompt, final int[] incorrect, ArrayList<String> alreadyGuessedLetters,
+                                  StringBuilder hangmanLetters){
         TextChannel channel = ctx.getChannel();
         channel.sendMessage("Welcome to hangman! Please mention/ping anyone you would like to play with. For example, if" +
                 " you wanted to play with your friends Bob and Joe, type in chat '@Bob and @Joe'" +
@@ -81,7 +79,7 @@ public class Hangman implements ICommand {
                             players.add(ctx.getMember());
                             players.addAll(mentionedMembers);
                         }
-                        getTargetWord(ctx);
+                        getTargetWord(ctx, players, prompt, incorrect, alreadyGuessedLetters, hangmanLetters);
                         System.out.println(players);
                     },
                     45, TimeUnit.SECONDS,
@@ -93,7 +91,46 @@ public class Hangman implements ICommand {
         });
     }
 
-    public void getRandomWord(CommandContext ctx) throws IOException {
+    public void getTargetWord(CommandContext ctx, ArrayList<Member> players, String prompt, final int[] incorrect, ArrayList<String> alreadyGuessedLetters,
+                              StringBuilder hangmanLetters){
+        TextChannel channel = ctx.getChannel();
+        channel.sendMessage("Cool. Now that we've gotten all users you want to play with, let me know if you " +
+                "would like to have a randomly generated word or if you would like to choose your own custom word!").setActionRows(
+                ActionRow.of(Button.secondary("random", "Generate Random Word"),
+                        Button.secondary("custom", "Use Custom Word"))).queue((message) -> {
+
+            this.waiter.waitForEvent(
+                    ButtonClickEvent.class,
+                    (e) -> {
+                        long nchannel = e.getChannel().getIdLong();
+                        long nuser = e.getMember().getUser().getIdLong();
+                        return ctx.getChannel().getIdLong() == nchannel && nuser == ctx.getMember().getIdLong();
+                    },
+                    (e) -> {
+                        if (e.getButton().getId().equals("random")){
+                            try {
+                                getRandomWord(ctx, players, prompt, incorrect, alreadyGuessedLetters, hangmanLetters);
+                                System.out.println(prompt);
+                            } catch (IOException ioException) {
+                                ioException.printStackTrace();
+                            }
+
+                        } else if (e.getButton().getId().equals("custom")){
+                            //private DM user for custom word
+                            User user = ctx.getMember().getUser();
+                            String content = "Please enter your custom word here in this private DM";
+                            DMUser(ctx, user, content, players, prompt, incorrect, alreadyGuessedLetters, hangmanLetters);
+                        }
+                    },
+                    90, TimeUnit.SECONDS,
+                    () -> {channel.sendMessage("You took too long to respond. Please try this command again").queue();
+                        return;}
+            );
+        });
+    }
+
+    public void getRandomWord(CommandContext ctx, ArrayList<Member> players, String prompt, final int[] incorrect, ArrayList<String> alreadyGuessedLetters,
+                              StringBuilder hangmanLetters) throws IOException {
         TextChannel channel = ctx.getChannel();
         String finalURL = "https://random-word-api.herokuapp.com/word";
         URL url = new URL(finalURL);
@@ -110,6 +147,7 @@ public class Hangman implements ICommand {
                 hangmanLetters.append('-');
             }
         }
+        System.out.println(prompt);
         channel.sendMessage("The game of hangman has started! Just keep in mind these things and have fun!\n" +
                 "1) Only users mentioned by the host will have their inputs accepted by the bot\n" +
                 "2) Users must only input single letters from a-z otherwise their input won't be accepted\n" +
@@ -117,48 +155,12 @@ public class Hangman implements ICommand {
                 "?guess <your guess>\n" +
                 "4) Have fun!").queue();
 
-        printDiagram(ctx);
-        initiateGame(ctx);
+        printDiagram(ctx, players, prompt, incorrect, alreadyGuessedLetters, hangmanLetters);
+        initiateGame(ctx, players, prompt, incorrect, alreadyGuessedLetters, hangmanLetters);
     }
 
-    public void getTargetWord(CommandContext ctx){
-        TextChannel channel = ctx.getChannel();
-        channel.sendMessage("Cool. Now that we've gotten all users you want to play with, let me know if you " +
-                "would like to have a randomly generated word or if you would like to choose your own custom word!").setActionRows(
-                        ActionRow.of(Button.secondary("random", "Generate Random Word"),
-                                Button.secondary("custom", "Use Custom Word"))).queue((message) -> {
-
-            this.waiter.waitForEvent(
-                    ButtonClickEvent.class,
-                    (e) -> {
-                        long nchannel = e.getChannel().getIdLong();
-                        long nuser = e.getMember().getUser().getIdLong();
-                        return ctx.getChannel().getIdLong() == nchannel && nuser == ctx.getMember().getIdLong();
-                    },
-                    (e) -> {
-                        if (e.getButton().getId().equals("random")){
-                            try {
-                                getRandomWord(ctx);
-                                System.out.println(prompt);
-                            } catch (IOException ioException) {
-                                ioException.printStackTrace();
-                            }
-
-                        } else if (e.getButton().getId().equals("custom")){
-                            //private DM user for custom word
-                            User user = ctx.getMember().getUser();
-                            String content = "Please enter your custom word here in this private DM";
-                            DMUser(ctx, user, content);
-                        }
-                    },
-                    90, TimeUnit.SECONDS,
-                    () -> {channel.sendMessage("You took too long to respond. Please try this command again").queue();
-                    return;}
-            );
-        });
-    }
-
-    public void DMUser(CommandContext ctx, User user, String content){
+    public void DMUser(CommandContext ctx, User user, String content, ArrayList<Member> players, String dummyprompt, final int[] incorrect, ArrayList<String> alreadyGuessedLetters,
+                       StringBuilder hangmanLetters){
         TextChannel channel = ctx.getChannel();
         try {
             user.openPrivateChannel().queue((DM) ->
@@ -171,6 +173,7 @@ public class Hangman implements ICommand {
                                 return DM.getIdLong() == nchannel && !e.getAuthor().isBot();
                             },
                             (e) -> {
+                                String prompt;
                                 //Disregard any additional whitespace in user input
                                 prompt = e.getMessage().getContentRaw().toLowerCase();
                                 prompt = prompt.replaceAll("\\s+", " ");
@@ -200,8 +203,8 @@ public class Hangman implements ICommand {
                                         "?guess <your guess>\n" +
                                         "4) Have fun!").queue();
 
-                                printDiagram(ctx);
-                                initiateGame(ctx);
+                                printDiagram(ctx, players, prompt, incorrect, alreadyGuessedLetters, hangmanLetters);
+                                initiateGame(ctx, players, prompt, incorrect, alreadyGuessedLetters, hangmanLetters);
                             },
                             90, TimeUnit.SECONDS,
                             () -> {
@@ -220,7 +223,8 @@ public class Hangman implements ICommand {
     }
 
     //utilize recursive waiter event until game ends by win or loss
-    public void initiateGame(CommandContext ctx){
+    public void initiateGame(CommandContext ctx, ArrayList<Member> players, String prompt, final int[] incorrect, ArrayList<String> alreadyGuessedLetters,
+                             StringBuilder hangmanLetters){
         TextChannel channel = ctx.getChannel();
             this.waiter.waitForEvent(
                     GuildMessageReceivedEvent.class,
@@ -234,20 +238,20 @@ public class Hangman implements ICommand {
                         //game
                         String input = e.getMessage().getContentRaw().toLowerCase();
                         if (input.equalsIgnoreCase("?guess " + prompt)){
-                            printDiagram(ctx);
+                            printDiagram(ctx, players, prompt, incorrect, alreadyGuessedLetters, hangmanLetters);
                             channel.sendMessage("Congratulations! You WON!!!! :smile: :partying_face:").queue();
                             return;
                         } else if (input.startsWith("?guess ")){
                             channel.sendMessage("Incorrect guess!").queue();
-                            incorrect++;
-                            printDiagram(ctx);
+                            incorrect[0]++;
+                            printDiagram(ctx, players, prompt, incorrect, alreadyGuessedLetters, hangmanLetters);
                         } else if ((input.length() > 1) || (int) input.charAt(0) < 97 || (int) input.charAt(0) > 122){
                             channel.sendMessage("That is not a valid input. Please try again and input only one letter from a-z.").queue();
                         } else if (alreadyGuessedLetters.contains(input)){
                             channel.sendMessage("You already guessed that letter!").queue();
                         } else {
-                            checkForLetterInPrompt(ctx, input);
-                            printDiagram(ctx);
+                            checkForLetterInPrompt(ctx, input, players, prompt, incorrect, alreadyGuessedLetters, hangmanLetters);
+                            printDiagram(ctx, players, prompt, incorrect, alreadyGuessedLetters, hangmanLetters);
 
                             //check for win
                             if (prompt.equalsIgnoreCase(String.valueOf(hangmanLetters))){
@@ -255,12 +259,12 @@ public class Hangman implements ICommand {
                                 return;
                             }
 
-                            if (incorrect == 7){
+                            if (incorrect[0] == 7){
                                 channel.sendMessage("You died! L + bozo + The word was " + prompt).queue();
                                 return;
                             }
                         }
-                        initiateGame(ctx);
+                        initiateGame(ctx, players, prompt, incorrect, alreadyGuessedLetters, hangmanLetters);
 
                     },
                     100, TimeUnit.SECONDS,
@@ -271,7 +275,8 @@ public class Hangman implements ICommand {
 
     }
 
-    public void checkForLetterInPrompt(CommandContext ctx, String input){
+    public void checkForLetterInPrompt(CommandContext ctx, String input, ArrayList<Member> players, String prompt, final int[] incorrect, ArrayList<String> alreadyGuessedLetters,
+                                       StringBuilder hangmanLetters){
         ArrayList<Integer> characterOccurences = new ArrayList<>();
         if (prompt.contains(input)){
             ctx.getChannel().sendMessage("Correct guess!").queue();
@@ -281,13 +286,12 @@ public class Hangman implements ICommand {
                 }
             }
 
-            for (int j = 0; j < characterOccurences.size(); j++){
-                int temp = characterOccurences.get(j);
+            for (int temp : characterOccurences) {
                 hangmanLetters.replace(temp, temp + 1, String.valueOf(prompt.charAt(temp)));
             }
         } else {
             ctx.getChannel().sendMessage("Incorrect guess!").queue();
-            incorrect++;
+            incorrect[0]++;
         }
 
         alreadyGuessedLetters.add(input);
@@ -297,7 +301,8 @@ public class Hangman implements ICommand {
      * Discord UI
      * @param ctx
      */
-    public void printDiagram(CommandContext ctx){
+    public void printDiagram(CommandContext ctx, ArrayList<Member> players, String prompt, final int[] incorrect, ArrayList<String> alreadyGuessedLetters,
+                             StringBuilder hangmanLetters){
         //set up hangman diagram
         String diagram = "+ - - +" +
                 "\n|" +
@@ -307,9 +312,9 @@ public class Hangman implements ICommand {
                 "\n|" +
                 "\n=====";
 
-        if (incorrect == 0){
+        if (incorrect[0] == 0){
             diagram = diagram;
-        } else if (incorrect == 1){
+        } else if (incorrect[0] == 1){
             diagram = "| - - - |" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E |" +
                     "\n|" +
@@ -317,23 +322,23 @@ public class Hangman implements ICommand {
                     "\n|" +
                     "\n|" +
                     "\n=====";
-        } else if (incorrect == 2){
-            diagram = "| - - - |" +
-                    "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E |" +
-                    "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E :face_with_spiral_eyes:" +
-                    "\n|" +
-                    "\n|" +
-                    "\n|" +
-                    "\n=====";
-        } else if (incorrect == 3){
+        } else if (incorrect[0] == 2){
             diagram = "| - - - |" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E |" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E :face_with_spiral_eyes:" +
+                    "\n|" +
+                    "\n|" +
+                    "\n|" +
+                    "\n=====";
+        } else if (incorrect[0] == 3){
+            diagram = "| - - - |" +
+                    "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E |" +
+                    "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E :face_with_spiral_eyes:" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E |" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E |" +
                     "\n|" +
                     "\n=====";
-        } else if (incorrect == 4){
+        } else if (incorrect[0] == 4){
             diagram = "| - - - |" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E |" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E :face_with_spiral_eyes:" +
@@ -341,7 +346,7 @@ public class Hangman implements ICommand {
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E |" +
                     "\n|" +
                     "\n=====";
-        } else if (incorrect == 5){
+        } else if (incorrect[0] == 5){
             diagram = "| - - - |" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E |" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E :face_with_spiral_eyes:" +
@@ -349,7 +354,7 @@ public class Hangman implements ICommand {
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E |" +
                     "\n|" +
                     "\n=====";
-        } else if (incorrect == 6){
+        } else if (incorrect[0] == 6){
             diagram = "| - - - |" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E |" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E :face_with_spiral_eyes:" +
@@ -357,7 +362,7 @@ public class Hangman implements ICommand {
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E |" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E / " +
                     "\n=====";
-        } else if (incorrect == 7){
+        } else if (incorrect[0] == 7){
             diagram = "| - - - |" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E \u200E |" +
                     "\n|\u200E \u200E \u200E \u200E \u200E \u200E \u200E :face_with_spiral_eyes:" +
