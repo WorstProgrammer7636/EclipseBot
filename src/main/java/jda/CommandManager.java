@@ -103,6 +103,7 @@ public class CommandManager {
             CommandContext ctx = new CommandContext(event, args);
 
             cmd.handle(ctx);
+            System.out.println(ctx.getGuild().getName() + ": " + ctx.getAuthor().getName() + ": " + cmd);
         }
     }
 }
