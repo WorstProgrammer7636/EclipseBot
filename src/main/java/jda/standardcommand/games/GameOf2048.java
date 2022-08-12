@@ -196,14 +196,17 @@ public class GameOf2048 implements ICommand {
                     //generate a random tile
                     String newCopyOfBoard = updatedBoard(board);
                     if (originalCopyOfBoard.equals(newCopyOfBoard)){
-                        System.out.println("Debug: nothing moved");
+                        //nothing moved
                     } else {
                         generateARandomTile(ctx, board, tile, emoteInfo);
                     }
 
                     //edit board
-                    System.out.println("Score: " + score);
                     e.editMessage(updatedBoard(board)).queue();
+                    if (gameIsLost(board)){
+                        ctx.getChannel().sendMessage("YOU LOST! Bruh.").queue();
+                        return;
+                    }
                     startGame(ctx, board, tile, emoteInfo);
 
                 },
@@ -403,6 +406,58 @@ public class GameOf2048 implements ICommand {
                 }
             }
         }
+    }
+
+    public boolean gameIsLost(String[][] board){
+        int occupiedTiles = 0;
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                if (!board[i][j].equals(":white_large_square:")){
+                    occupiedTiles++;
+                }
+            }
+        }
+        System.out.println("occupied tiles:" + occupiedTiles);
+        if (occupiedTiles != 16){
+            return false;
+        }
+
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                try {
+                    if (board[i][j].equals(board[i][j+1])){
+                        return false;
+                    }
+                } catch (ArrayIndexOutOfBoundsException exception){
+                    //continue;
+                }
+
+                try {
+                    if (board[i][j].equals(board[i][j-1])){
+                        return false;
+                    }
+                } catch (ArrayIndexOutOfBoundsException exception){
+                    //continue;
+                }
+
+                try {
+                    if (board[i][j].equals(board[i+1][j])){
+                        return false;
+                    }
+                } catch (ArrayIndexOutOfBoundsException exception){
+                    //continue;
+                }
+
+                try {
+                    if (board[i][j].equals(board[i-1][j])){
+                        return false;
+                    }
+                } catch (ArrayIndexOutOfBoundsException exception){
+                    //continue;
+                }
+            }
+        }
+        return true;
     }
 
     public boolean allEmotesInstalled(CommandContext ctx, HashMap<String, Long> emoteInfo){
