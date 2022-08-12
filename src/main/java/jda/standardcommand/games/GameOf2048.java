@@ -23,16 +23,18 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+
 public class GameOf2048 implements ICommand {
     private final EventWaiter waiter;
+    private int score = 0;
     @Override
     public void handle(CommandContext ctx) throws IOException, GeneralSecurityException {
         //initialize
         List<Emote> emotes = ctx.getGuild().getEmotes();
-        HashMap<String, Long> emoteInfo = new HashMap<String, Long>();
+        HashMap<String, Long> emoteInfo = new HashMap<>();
         TwentyFourtyEightTiles tile = new TwentyFourtyEightTiles();
-        for (int i = 0; i < emotes.size(); i++){
-            emoteInfo.put(emotes.get(i).getName(), emotes.get(i).getIdLong());
+        for (Emote emote : emotes) {
+            emoteInfo.put(emote.getName(), emote.getIdLong());
         }
 
         if (!allEmotesInstalled(ctx, emoteInfo)){
@@ -138,9 +140,11 @@ public class GameOf2048 implements ICommand {
         String downButton = "downButton" + ctx.getAuthor().getIdLong();
         String rightButton = "rightButton" + ctx.getAuthor().getIdLong();
         String quitButton = "quitButton" + ctx.getAuthor().getIdLong();
+        String solveButton = "solveButton" + ctx.getAuthor().getIdLong();
 
+        ctx.getChannel().sendMessage("***PLEASE DON'T START A NEW GAME BEFORE FINISHING OR QUITTING THIS CURRENT GAME!***").queue();
         ctx.getChannel().sendMessage(display).setActionRows(
-                ActionRow.of(Button.secondary(upButton, "⬆️"), Button.danger(quitButton, "QUIT")),
+                ActionRow.of(Button.success(solveButton, "SOLVE"), Button.secondary(upButton, "⬆️"), Button.danger(quitButton, "QUIT")),
                 ActionRow.of(Button.secondary(leftButton, "⬅️"),
                         Button.secondary(downButton, "⬇️"),
                         Button.secondary(rightButton, "➡️"))).queue();
@@ -180,6 +184,8 @@ public class GameOf2048 implements ICommand {
                     } else if (e.getButton().getId().equalsIgnoreCase("quitButton" + ctx.getAuthor().getIdLong())){
                         ctx.getChannel().sendMessage("You quit the game").queue();
                         return;
+                    } else if (e.getButton().getId().equalsIgnoreCase("solveButton" + ctx.getAuthor().getIdLong())){
+                        ctx.getChannel().sendMessage("This feature is not out yet! Sorry").queue();
                     } else {
                         String disqualifiedUser = "<@" + e.getMember().getUser().getIdLong() + ">";
                         ctx.getChannel().sendMessage(disqualifiedUser + " You were automatically disqualified from your game for " +
@@ -196,13 +202,16 @@ public class GameOf2048 implements ICommand {
                     }
 
                     //edit board
+                    System.out.println("Score: " + score);
                     e.editMessage(updatedBoard(board)).queue();
                     startGame(ctx, board, tile, emoteInfo);
 
                 },
                 90, TimeUnit.SECONDS,
-                () -> {ctx.getChannel().sendMessage("You took too long to respond. Game has ended").queue();
-                return;}
+                () -> {
+                    ctx.getChannel().sendMessage("You took too long to respond. Game has ended").queue();
+                    return;
+                }
         );
     }
 
@@ -222,28 +231,38 @@ public class GameOf2048 implements ICommand {
 
 
         if (dominantTile.equals(twoTile)){
+            score += 4;
             return fourTile;
         } else if (dominantTile.equals(fourTile)){
+            score += 8;
             return eightTile;
         } else if (dominantTile.equals(eightTile)){
+            score += 16;
             return sixteenTile;
         } else if (dominantTile.equals(sixteenTile)){
+            score += 32;
             return thirtytwoTile;
         } else if (dominantTile.equals(thirtytwoTile)){
+            score += 64;
             return sixtyfourTile;
         } else if (dominantTile.equals(sixtyfourTile)){
+            score += 128;
             return onetwoeightTile;
         } else if (dominantTile.equals(onetwoeightTile)){
+            score += 256;
             return twofivesixTile;
         } else if (dominantTile.equals(twofivesixTile)){
+            score += 512;
             return fivetwelveTile;
         } else if (dominantTile.equals(fivetwelveTile)){
+            score += 1024;
             return onezerotwofourTile;
         } else if (dominantTile.equals(onezerotwofourTile)){
+            score += 2048;
             return twentyfouryeightTile;
         } else {
-            System.out.println(dominantTile);
-            return "shouldn't be this";
+            System.out.println("Debug: mergeTiles failure");
+            return "contact dev immediately if you see this message";
         }
     }
 
@@ -431,7 +450,8 @@ public class GameOf2048 implements ICommand {
             return false;
         } else if (missingEmotes == 11){
             ctx.getChannel().sendMessage("You need to add custom emotes for the 2048 game to work!" +
-                    " type ?install2048emotes to add them").queue();
+                    " type ?install2048emotes to add them. Once you run this command, you will be able to play " +
+                    "2048.").queue();
             return false;
         }
 
