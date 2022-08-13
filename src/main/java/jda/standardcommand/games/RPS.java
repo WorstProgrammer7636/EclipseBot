@@ -19,8 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RPS implements ICommand {
     private final EventWaiter waiter;
-    String firstSelectionChoice;
-    String secondSelectionChoice;
+
 
     public RPS(EventWaiter waiter) {
         this.waiter = waiter;
@@ -30,7 +29,6 @@ public class RPS implements ICommand {
     public void handle(CommandContext ctx) throws IOException, GeneralSecurityException {
         final TextChannel channel = ctx.getChannel();
         final List<String> args = ctx.getArgs();
-
         List<Member> mentionedMembers = ctx.getMessage().getMentionedMembers();
         if (mentionedMembers.size() == 0){
             channel.sendMessage("You didn't mention anyone to play with!").queue();
@@ -38,6 +36,12 @@ public class RPS implements ICommand {
         } else if (mentionedMembers.size() > 1){
             channel.sendMessage("You can only play with one person").queue();
             return;
+        } else if (mentionedMembers.get(0).getIdLong() == Long.parseLong("1003478249755656273")){
+            channel.sendMessage("Sorry but I can't really play with you! I'm juggling lots of programs right now. But maybe in the future " +
+                    ":wink:").queue();
+            return;
+        } else if (mentionedMembers.get(0).getIdLong() == ctx.getAuthor().getIdLong()){
+            channel.sendMessage("Really? You want to play with yourself? Why? No friends? Ok, be my guest :smile:").queue();
         }
 
         firstSelection(ctx, channel, mentionedMembers.get(0));
@@ -47,9 +51,9 @@ public class RPS implements ICommand {
     public void firstSelection(CommandContext ctx, TextChannel channel, Member opponent){
         channel.sendMessage(ctx.getAuthor().getName() + ", you have 10 seconds to choose between rock, paper, or scissors. Go!").
                 setActionRows(ActionRow.of(
-                        Button.secondary("1", "rock"),
-                        Button.secondary("2", "paper"),
-                        Button.secondary("3", "scissors"))).queue((message) -> {
+                        Button.success("1", "rock"),
+                        Button.success("2", "paper"),
+                        Button.success("3", "scissors"))).queue((message) -> {
 
             this.waiter.waitForEvent(
                     ButtonClickEvent.class,
@@ -59,9 +63,8 @@ public class RPS implements ICommand {
                         return ctx.getChannel().getIdLong() == nchannel && nuser == ctx.getMember().getIdLong();
                     },
                     (e) -> {
-                        firstSelectionChoice = e.getButton().getLabel();
-                        channel.sendMessage(ctx.getAuthor().getName() + " has locked in his choice!").queue();
-                        secondSelection(ctx, channel, ctx.getAuthor().getName(), opponent);
+                        String firstSelectionChoice = e.getButton().getLabel();
+                        secondSelection(ctx, channel, ctx.getAuthor().getName(), opponent, firstSelectionChoice);
                     },
                     10, TimeUnit.SECONDS,
                     () -> channel.sendMessage("Disqualified. You took too long to respond").queue()
@@ -69,12 +72,12 @@ public class RPS implements ICommand {
         });
     }
 
-    public void secondSelection(CommandContext ctx, TextChannel channel, String protag, Member opponent){
+    public void secondSelection(CommandContext ctx, TextChannel channel, String protag, Member opponent, String first){
         channel.sendMessage(opponent.getEffectiveName() + ", Your Turn! You have 10 seconds to choose between rock, paper, or scissors. Go!").
                 setActionRows(ActionRow.of(
-                        Button.secondary("1", "rock"),
-                        Button.secondary("2", "paper"),
-                        Button.secondary("3", "scissors"))).queue((message) -> {
+                        Button.danger("1", "rock"),
+                        Button.danger("2", "paper"),
+                        Button.danger("3", "scissors"))).queue((message) -> {
 
             this.waiter.waitForEvent(
                     ButtonClickEvent.class,
@@ -84,9 +87,8 @@ public class RPS implements ICommand {
                         return ctx.getChannel().getIdLong() == nchannel && nuser == opponent.getIdLong();
                     },
                     (e) -> {
-                        secondSelectionChoice = e.getButton().getLabel();
-                        channel.sendMessage(opponent.getEffectiveName() + " has locked in his choice!").queue();
-                        displayWinner(ctx, channel, protag, opponent.getEffectiveName());
+                        String secondSelectionChoice = e.getButton().getLabel();
+                        displayWinner(ctx, channel, protag, opponent.getEffectiveName(), first, secondSelectionChoice);
                     },
                     10, TimeUnit.SECONDS,
                     () -> channel.sendMessage("Disqualified. You took too long to respond").queue()
@@ -94,7 +96,7 @@ public class RPS implements ICommand {
         });
     }
 
-    public void displayWinner(CommandContext ctx, TextChannel channel, String protag, String opponent){
+    public void displayWinner(CommandContext ctx, TextChannel channel, String protag, String opponent, String firstSelectionChoice, String secondSelectionChoice){
         String finalMessage = protag + " picked " + firstSelectionChoice + ". " +
                 opponent + " picked " + secondSelectionChoice + ". ";
         if (firstSelectionChoice.equals("rock") && secondSelectionChoice.equals("rock")){
