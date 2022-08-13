@@ -51,6 +51,11 @@
             <version>3.12.11</version>
         </dependency>
         <dependency>
+            <groupId>com.google.gdata</groupId>
+            <artifactId>core</artifactId>
+            <version>1.47.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-youtube</artifactId>
             <version>v3-rev222-1.25.0</version>
@@ -119,6 +124,13 @@
             <version>3.36.0.1</version>
         </dependency>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.6-android</version>
+        </dependency>
+        <!-- Thanks for using https://jar-download.com -->
+
+        <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-drive</artifactId>
             <version>v3-rev20210725-1.32.1</version>
@@ -126,7 +138,7 @@
         <dependency>
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client</artifactId>
-            <version>1.32.1</version>
+            <version>1.33.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.oauth-client</groupId>
@@ -136,7 +148,12 @@
         <dependency>
             <groupId>com.google.oauth-client</groupId>
             <artifactId>google-oauth-client-jetty</artifactId>
-            <version>1.30.4</version>
+            <version>1.32.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-sheets</artifactId>
+            <version>v4-rev20210629-1.32.1</version>
         </dependency>
         <dependency>
             <groupId>com.sun.mail</groupId>
