@@ -63,6 +63,7 @@ public class CommandManager {
         addCommand(new GameOf2048(waiter));
         addCommand(new FlushServerEmotes());
         addCommand(new InstallEmotes());
+        addCommand(new MultiplayerConnectFour(waiter));
     }
 
     private void addCommand(ICommand cmd) {
