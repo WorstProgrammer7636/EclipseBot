@@ -145,6 +145,6 @@ public class GetStudentInfo implements ICommand {
 
     @Override
     public String getHelp() {
-        return "under test";
+        return "return student info(classes, periods, and teachers) by name";
     }
 }
