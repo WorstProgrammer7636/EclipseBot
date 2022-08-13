@@ -128,7 +128,7 @@ public class GetStudentInfo implements ICommand {
                 studentInfo.addField("FALL CLASSES", fallClasses, true);
                 studentInfo.addField("SPRING CLASSES", springClasses, true);
                 studentInfo.setDescription("[Not in the database? Add your name and classes here!](" +
-                        "https://docs.google.com/spreadsheets/d/1jpQPXNnInJMPh7DJMQ4IOwoEj1b7AzCBKBVbcoieDZs/edit#gid=218595227)");
+                        "https://docs.google.com/spreadsheets/d/" + Config.get("SPREADSHEETID") + "/edit#gid=218595227)");
                 studentInfo.setColor(Color.BLUE);
 
                 ctx.getChannel().sendMessage(studentInfo.build()).queue();
