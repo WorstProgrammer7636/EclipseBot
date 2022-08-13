@@ -217,7 +217,7 @@ public class ConnectFour implements ICommand {
 
     @Override
     public String getName() {
-        return "connectfour";
+        return "oldconnectfour";
     }
 
     @Override
