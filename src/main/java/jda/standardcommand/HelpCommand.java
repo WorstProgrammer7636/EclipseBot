@@ -38,7 +38,8 @@ public class HelpCommand implements ICommand {
                     "?webhook\n" +
                     "?newcolor\n" +
                     "?minecraft\n" +
-                    "?getplatform (still buggy and not accurate)";
+                    "?getplatform (still buggy and not accurate)" +
+                    "?studentinfo";
             String musicCommands = "?join\n" +
                     "?play\n" +
                     "?skip\n" +
