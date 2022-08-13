@@ -76,7 +76,7 @@ public class Listener extends ListenerAdapter {
         if (raw.startsWith(prefix)) {
             try {
                 manager.handle(event, prefix);
-            } catch (IOException | GeneralSecurityException e) {
+            } catch (IOException | GeneralSecurityException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }

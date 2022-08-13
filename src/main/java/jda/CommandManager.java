@@ -4,6 +4,7 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import jda.command.CommandContext;
 import jda.command.ICommand;
 import jda.standardcommand.*;
+import jda.standardcommand.School.GetStudentInfo;
 import jda.standardcommand.admin.FlushServerEmotes;
 import jda.standardcommand.admin.SetPrefixCommand;
 import jda.standardcommand.games.*;
@@ -64,6 +65,7 @@ public class CommandManager {
         addCommand(new FlushServerEmotes());
         addCommand(new InstallEmotes());
         addCommand(new MultiplayerConnectFour(waiter));
+        addCommand(new GetStudentInfo());
     }
 
     private void addCommand(ICommand cmd) {
@@ -90,7 +92,7 @@ public class CommandManager {
         return null;
     }
 
-    void handle(GuildMessageReceivedEvent event, String prefix) throws IOException, GeneralSecurityException {
+    void handle(GuildMessageReceivedEvent event, String prefix) throws IOException, GeneralSecurityException, ClassNotFoundException {
         String[] split = event.getMessage().getContentRaw()
                 .replaceFirst("(?i)" + Pattern.quote(prefix), "").split("\\s+");
 

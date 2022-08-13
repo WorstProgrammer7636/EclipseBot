@@ -23,10 +23,8 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-
 public class GameOf2048 implements ICommand {
     private final EventWaiter waiter;
-    private int score = 0;
     @Override
     public void handle(CommandContext ctx) throws IOException, GeneralSecurityException {
         //initialize
@@ -40,12 +38,12 @@ public class GameOf2048 implements ICommand {
         if (!allEmotesInstalled(ctx, emoteInfo)){
             return;
         }
-
+        int score = 0;
         String[][] board = new String[4][4];
         setUpSettings(ctx, board, tile.blankTile, tile, emoteInfo);
         generateTwoRandomTiles(ctx, board, tile.blankTile, tile, emoteInfo);
         displayBoard(ctx, board, emoteInfo);
-        startGame(ctx, board, tile, emoteInfo);
+        startGame(ctx, board, tile, emoteInfo, score);
     }
 
     public String displayEmotes(HashMap<String, Long> emoteInfo, String emoteToGet){
@@ -162,7 +160,7 @@ public class GameOf2048 implements ICommand {
         return updatedVer;
     }
 
-    public void startGame(CommandContext ctx, String[][] board, TwentyFourtyEightTiles tile, HashMap<String, Long> emoteInfo){
+    public void startGame(CommandContext ctx, String[][] board, TwentyFourtyEightTiles tile, HashMap<String, Long> emoteInfo, int score){
         String userID = String.valueOf(ctx.getAuthor().getIdLong());
         this.waiter.waitForEvent(
                 ButtonClickEvent.class,
@@ -174,13 +172,13 @@ public class GameOf2048 implements ICommand {
                 (e) -> {
                     String originalCopyOfBoard = updatedBoard(board);
                     if (e.getButton().getId().equalsIgnoreCase("upButton" + ctx.getAuthor().getIdLong())){
-                        moveTilesUp(ctx, board, tile, emoteInfo);
+                        moveTilesUp(ctx, board, tile, emoteInfo, score);
                     } else if (e.getButton().getId().equalsIgnoreCase("leftButton" + ctx.getAuthor().getIdLong())){
-                        moveTilesLeft(ctx, board, tile, emoteInfo);
+                        moveTilesLeft(ctx, board, tile, emoteInfo, score);
                     } else if (e.getButton().getId().equalsIgnoreCase("downButton" + ctx.getAuthor().getIdLong())){
-                        moveTilesDown(ctx, board, tile, emoteInfo);
+                        moveTilesDown(ctx, board, tile, emoteInfo, score);
                     } else if (e.getButton().getId().equalsIgnoreCase("rightButton" + ctx.getAuthor().getIdLong())){
-                        moveTilesRight(ctx, board, tile, emoteInfo);
+                        moveTilesRight(ctx, board, tile, emoteInfo, score);
                     } else if (e.getButton().getId().equalsIgnoreCase("quitButton" + ctx.getAuthor().getIdLong())){
                         ctx.getChannel().sendMessage("You quit the game").queue();
                         return;
@@ -203,11 +201,15 @@ public class GameOf2048 implements ICommand {
 
                     //edit board
                     e.editMessage(updatedBoard(board)).queue();
+                    if (gameIsWon(board, emoteInfo)){
+                        ctx.getChannel().sendMessage("You reached 2048 and won!!! :partying_face:").queue();
+                        return;
+                    }
                     if (gameIsLost(board)){
                         ctx.getChannel().sendMessage("YOU LOST! Bruh.").queue();
                         return;
                     }
-                    startGame(ctx, board, tile, emoteInfo);
+                    startGame(ctx, board, tile, emoteInfo, score);
 
                 },
                 90, TimeUnit.SECONDS,
@@ -234,34 +236,24 @@ public class GameOf2048 implements ICommand {
 
 
         if (dominantTile.equals(twoTile)){
-            score += 4;
             return fourTile;
         } else if (dominantTile.equals(fourTile)){
-            score += 8;
             return eightTile;
         } else if (dominantTile.equals(eightTile)){
-            score += 16;
             return sixteenTile;
         } else if (dominantTile.equals(sixteenTile)){
-            score += 32;
             return thirtytwoTile;
         } else if (dominantTile.equals(thirtytwoTile)){
-            score += 64;
             return sixtyfourTile;
         } else if (dominantTile.equals(sixtyfourTile)){
-            score += 128;
             return onetwoeightTile;
         } else if (dominantTile.equals(onetwoeightTile)){
-            score += 256;
             return twofivesixTile;
         } else if (dominantTile.equals(twofivesixTile)){
-            score += 512;
             return fivetwelveTile;
         } else if (dominantTile.equals(fivetwelveTile)){
-            score += 1024;
             return onezerotwofourTile;
         } else if (dominantTile.equals(onezerotwofourTile)){
-            score += 2048;
             return twentyfouryeightTile;
         } else {
             System.out.println("Debug: mergeTiles failure");
@@ -269,7 +261,9 @@ public class GameOf2048 implements ICommand {
         }
     }
 
-    public void moveTilesUp(CommandContext ctx, String[][] board, TwentyFourtyEightTiles tile, HashMap<String, Long> emoteInfo){
+
+
+    public void moveTilesUp(CommandContext ctx, String[][] board, TwentyFourtyEightTiles tile, HashMap<String, Long> emoteInfo, int score){
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
                 String currentTile = board[i][j];
@@ -304,7 +298,7 @@ public class GameOf2048 implements ICommand {
         }
     }
 
-    public void moveTilesLeft(CommandContext ctx, String[][] board, TwentyFourtyEightTiles tile, HashMap<String, Long> emoteInfo){
+    public void moveTilesLeft(CommandContext ctx, String[][] board, TwentyFourtyEightTiles tile, HashMap<String, Long> emoteInfo, int score){
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
                 String currentTile = board[i][j];
@@ -338,7 +332,7 @@ public class GameOf2048 implements ICommand {
             }
         }
     }
-    public void moveTilesDown(CommandContext ctx, String[][] board, TwentyFourtyEightTiles tile, HashMap<String, Long> emoteInfo){
+    public void moveTilesDown(CommandContext ctx, String[][] board, TwentyFourtyEightTiles tile, HashMap<String, Long> emoteInfo, int score){
         for (int i = 3; i >= 0; i--){
             for (int j = 0; j < 4; j++){
                 String currentTile = board[i][j];
@@ -373,7 +367,7 @@ public class GameOf2048 implements ICommand {
         }
     }
 
-    public void moveTilesRight(CommandContext ctx, String[][] board, TwentyFourtyEightTiles tile, HashMap<String, Long> emoteInfo){
+    public void moveTilesRight(CommandContext ctx, String[][] board, TwentyFourtyEightTiles tile, HashMap<String, Long> emoteInfo, int score){
         for (int i = 0; i < 4; i++){
             for (int j = 3; j >= 0; j--){
                 String currentTile = board[i][j];
@@ -408,6 +402,18 @@ public class GameOf2048 implements ICommand {
         }
     }
 
+    public boolean gameIsWon(String[][] board, HashMap<String, Long> emoteInfo){
+        String twentyfourtyeightTile = displayEmotes(emoteInfo, "2048Tile");
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                if (board[i][j].equals(twentyfourtyeightTile)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean gameIsLost(String[][] board){
         int occupiedTiles = 0;
         for (int i = 0; i < 4; i++){
@@ -417,7 +423,6 @@ public class GameOf2048 implements ICommand {
                 }
             }
         }
-        System.out.println("occupied tiles:" + occupiedTiles);
         if (occupiedTiles != 16){
             return false;
         }
@@ -514,7 +519,60 @@ public class GameOf2048 implements ICommand {
 
     }
 
+    public void enableRandomEngine(CommandContext ctx, String[][] board, TwentyFourtyEightTiles tile, HashMap<String, Long> emoteInfo, ButtonClickEvent e, int score){
+        //timeInterval in milliseconds
+        Random moveGenerator = new Random();
+        long timeInterval = 500;
+        Runnable runnable = new Runnable(){
+            public void run(){
+                while (true){
+                    String originalCopyOfBoard = updatedBoard(board);
+                    int move = moveGenerator.nextInt(4);
+                    if (move == 0){
+                        moveTilesUp(ctx, board, tile, emoteInfo, score);
+                    } else if (move == 1){
+                        moveTilesLeft(ctx, board, tile, emoteInfo, score);
+                    } else if (move == 2){
+                        moveTilesDown(ctx, board, tile, emoteInfo, score);
+                    } else if (move == 3){
+                        moveTilesRight(ctx, board, tile, emoteInfo, score);
+                    }
+                    //generate a random tile
+                    String newCopyOfBoard = updatedBoard(board);
+                    if (originalCopyOfBoard.equals(newCopyOfBoard)){
+                        //nothing moved
+                    } else {
+                        generateARandomTile(ctx, board, tile, emoteInfo);
+                    }
 
+                    //edit board
+                    e.editMessage(updatedBoard(board)).queue();
+                    if (gameIsWon(board, emoteInfo)){
+                        ctx.getChannel().sendMessage("You reached 2048 and won!!! :partying_face:").queue();
+                        return;
+                    }
+                    if (gameIsLost(board)){
+                        ctx.getChannel().sendMessage("YOU LOST! Bruh.").queue();
+                        return;
+                    }
+                    try {
+                        Thread.sleep(timeInterval);
+                    } catch (InterruptedException interruptedException){
+                        ctx.getChannel().sendMessage("Something went very wrong").queue();
+                        interruptedException.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        Thread thread = new Thread(runnable);
+        thread.start();
+
+    }
+
+    public void enableSolverEngine(String[][] board){
+
+    }
 
 
     @Override

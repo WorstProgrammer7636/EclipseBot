@@ -2,3 +2,6 @@ env
 prefixes
 src/main/java/jda/standardcommand/Email.java
 src/main/java/jda/standardcommand/AdminExec.java
+src/main/resources/credentials.json
+target/classes/credentials.json
+tokens/StoredCredential
