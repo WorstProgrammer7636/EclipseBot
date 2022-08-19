@@ -3,7 +3,9 @@ package jda.standardcommand.School;
 import jda.Config;
 import jda.command.CommandContext;
 import jda.command.ICommand;
+import net.dv8tion.jda.api.EmbedBuilder;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -37,13 +39,13 @@ public class DarkstarDistance implements ICommand {
         String apiKey = Config.get("WOLFRAMAPI");
         String searchResult = "";
         if (seconds <= 210.665){
-            String[] arguments = {"0.000621371", "(", "integral_0^210.665", "231.5dx"};
+            String[] arguments = {"0.000621371", "(", "integral_0^" + seconds, "231.5dx"};
             searchResult = String.join("+", arguments);
         } else if (seconds <= 371){
-            String[] arguments = {"0.000621371", "(", "integral_0^210.665", "231.5dx", "plus", "integral_211^371", "(20", "(x", "-", "210.665)", "plus", "231.5)", "dx"};
+            String[] arguments = {"0.000621371", "(", "integral_0^210.665", "231.5dx", "plus", "integral_211^" + seconds, "(20", "(x", "-", "210.665)", "plus", "231.5)", "dx"};
             searchResult = String.join("+", arguments);
         } else {
-            String[] arguments = {"0.000621371", "(", "integral_0^210.665", "231.5dx", "plus", "integral_211^371", "(20", "(x", "-", "210.665)", "plus", "231.5)", "dx", "plus", "integral_371^"+seconds, "3430dx)"};
+            String[] arguments = {"0.000621371", "(", "integral_0^210.665", "231.5dx", "plus", "integral_211^371", "(20", "(x", "-", "210.665)", "plus", "231.5)", "dx", "plus", "integral_371^" + seconds, "3430dx)"};
             searchResult = String.join("+", arguments);
         }
 
@@ -51,6 +53,7 @@ public class DarkstarDistance implements ICommand {
         URL url = new URL(finalURL);
         BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
         String answer;
+        StringBuilder miles = new StringBuilder();
         while ((answer = in.readLine()) != null) {
             if (answer.length() > 1999){
                 ctx.getChannel().sendMessage("The question you asked provoked a response of " +
@@ -58,10 +61,18 @@ public class DarkstarDistance implements ICommand {
                         " a different question").queue();
                 return;
             }
-            ctx.getChannel().sendMessage("The hypersonic darkstar would travel " + answer + " miles if it flew " + seconds + " seconds!\n" +
-                    "Learn how it works here!: https://docs.google.com/document/d/13wZznNwV747Kisrv5-cww1hVKFTKaxASBlfILGN4MHE/edit").queue();
+            miles.append(answer);
         }
         in.close();
+
+        EmbedBuilder result = new EmbedBuilder();
+        result.setTitle("Your results:");
+        result.setDescription("The hypersonic darkstar would travel " + miles + " miles if it flew " + seconds + " seconds!\n" +
+                "");
+        result.setFooter("Learn how it works here!: https://docs.google.com/document/d/13wZznNwV747Kisrv5-cww1hVKFTKaxASBlfILGN4MHE/edit");
+        result.setThumbnail("https://www.thedrive.com/uploads/2022/06/02/Darkstar-Lockheed-TOPGUN.jpg?auto=webp&auto=webp&optimize=high&quality=70&width=1920");
+        result.setColor(Color.MAGENTA);
+        ctx.getChannel().sendMessage(result.build()).queue();
     }
 
     @Override
