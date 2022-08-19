@@ -4,6 +4,7 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import jda.command.CommandContext;
 import jda.command.ICommand;
 import jda.standardcommand.*;
+import jda.standardcommand.School.DarkstarDistance;
 import jda.standardcommand.School.GetStudentInfo;
 import jda.standardcommand.admin.FlushServerEmotes;
 import jda.standardcommand.admin.SetPrefixCommand;
@@ -66,6 +67,7 @@ public class CommandManager {
         addCommand(new InstallEmotes());
         addCommand(new MultiplayerConnectFour(waiter));
         addCommand(new GetStudentInfo());
+        addCommand(new DarkstarDistance());
     }
 
     private void addCommand(ICommand cmd) {
