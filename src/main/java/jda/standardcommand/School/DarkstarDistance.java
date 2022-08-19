@@ -84,6 +84,6 @@ public class DarkstarDistance implements ICommand {
 
     @Override
     public String getHelp() {
-        return null;
+        return "calculate the distance that the hypersonic darkstar travels with a given number of seconds. Usage: ?darkstar 600";
     }
 }
