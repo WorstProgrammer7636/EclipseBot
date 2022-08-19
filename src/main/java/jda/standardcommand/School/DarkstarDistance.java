@@ -58,7 +58,8 @@ public class DarkstarDistance implements ICommand {
                         " a different question").queue();
                 return;
             }
-            ctx.getChannel().sendMessage("The hypersonic darkstar would travel " + answer + " miles if it flew " + seconds + " seconds!").queue();
+            ctx.getChannel().sendMessage("The hypersonic darkstar would travel " + answer + " miles if it flew " + seconds + " seconds!\n" +
+                    "Learn how it works here!: https://docs.google.com/document/d/13wZznNwV747Kisrv5-cww1hVKFTKaxASBlfILGN4MHE/edit").queue();
         }
         in.close();
     }
