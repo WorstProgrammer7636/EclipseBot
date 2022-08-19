@@ -218,6 +218,7 @@ public class GameOf2048 implements ICommand {
                     return;
                 }
         );
+
     }
 
     public String mergeTiles(CommandContext ctx, String dominantTile, String shiftingTile, TwentyFourtyEightTiles tile,

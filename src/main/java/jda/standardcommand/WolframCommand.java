@@ -47,6 +47,7 @@ public class WolframCommand implements ICommand {
                             " a different question").queue();
                     return;
                 }
+                System.out.println(args);
                 channel.sendMessage("ANSWER IS: " + line).queue();
             }
             in.close();

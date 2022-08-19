@@ -59,9 +59,12 @@ public class GetStudentInfo implements ICommand {
     public void handle(CommandContext ctx) throws IOException, GeneralSecurityException {
         String student = "";
         if (ctx.getArgs().isEmpty()){
-            ctx.getChannel().sendMessage("Please type the name of a student you want to search for").queue();
+            ctx.getChannel().sendMessage("Please type the name of a student you want to search for. Example: ?studentinfo John Doe").queue();
             return;
-        } else if (ctx.getArgs().size() > 2){
+        } else if (ctx.getArgs().size() == 1){
+            ctx.getChannel().sendMessage("Please enter the first and last name of the student you want to search for. Example: ?studentinfo John Doe").queue();
+            return;
+        }else if (ctx.getArgs().size() > 2){
             ctx.getChannel().sendMessage("Please enter the first and last name of the student you want to search for. Example: " +
                     "?studentinfo John Doe").queue();
             return;
@@ -117,7 +120,7 @@ public class GetStudentInfo implements ICommand {
                 }
                 String fallClasses = "Period 1: " + stringValues.get(studentIndex).get(1) + "\nPeriod 2: "
                         + stringValues.get(studentIndex).get(2) + "\nPeriod 3: " +
-                        stringValues.get(studentIndex).get(3) + "\nPeriod 4: " + stringValues.get(studentIndex).get(4) + "\nHomeroom: " +
+                        stringValues.get(studentIndex).get(3) + "\nPeriod 4: " + stringValues.get(studentIndex).get(4) + "\n" +
                         stringValues.get(studentIndex).get(5);
 
                 String springClasses = "Period 1: " + stringValues.get(studentIndex).get(6) + "\nPeriod 2: "
