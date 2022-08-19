@@ -69,7 +69,9 @@ public class DarkstarDistance implements ICommand {
         result.setTitle("Your results:");
         result.setDescription("The hypersonic darkstar would travel " + miles + " miles if it flew " + seconds + " seconds!\n" +
                 "");
-        result.setFooter("Learn how it works here!: https://docs.google.com/document/d/13wZznNwV747Kisrv5-cww1hVKFTKaxASBlfILGN4MHE/edit");
+        result.setFooter("Learn how it works here!: https://docs.google.com/document/d/13wZznNwV747Kisrv5-cww1hVKFTKaxASBlfILGN4MHE/edit \n" +
+                "\n" +
+                "Watch the scene: https://www.youtube.com/watch?v=8IeqOZt72ZU&ab_channel=Maxwell");
         result.setThumbnail("https://www.thedrive.com/uploads/2022/06/02/Darkstar-Lockheed-TOPGUN.jpg?auto=webp&auto=webp&optimize=high&quality=70&width=1920");
         result.setColor(Color.MAGENTA);
         ctx.getChannel().sendMessage(result.build()).queue();
