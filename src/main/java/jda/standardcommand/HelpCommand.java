@@ -39,7 +39,8 @@ public class HelpCommand implements ICommand {
                     "?newcolor\n" +
                     "?minecraft\n" +
                     "?getplatform (still buggy and not accurate)\n" +
-                    "?studentinfo";
+                    "?studentinfo\n" +
+                    "?darkstar";
             String musicCommands = "?join\n" +
                     "?play\n" +
                     "?skip\n" +
@@ -49,7 +50,8 @@ public class HelpCommand implements ICommand {
                     "?queue\n" +
                     "?nowplaying\n" +
                     "?disconnect\n" +
-                    "?volume\n";
+                    "?volume\n" +
+                    "";
 
             StringBuilder builder = new StringBuilder();
             EmbedBuilder commandList = new EmbedBuilder();

@@ -68,6 +68,7 @@ public class CommandManager {
         addCommand(new MultiplayerConnectFour(waiter));
         addCommand(new GetStudentInfo());
         addCommand(new DarkstarDistance());
+        addCommand(new SpeedOfLight(waiter));
     }
 
     private void addCommand(ICommand cmd) {
